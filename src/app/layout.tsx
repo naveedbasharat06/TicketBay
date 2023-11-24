@@ -15,7 +15,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <div  className="pl-10 pr-10">
+        <div  className="pl-8 pr-8">
           <Header></Header>
           <div
           >
@@ -30,7 +30,9 @@ export default function RootLayout({
               </AnimatePresence>
             </motion.div>
           </div>
-          <Footer></Footer>
+          <div className="mt-[30px]">
+            <Footer></Footer>
+          </div>
         </div>
       </body>
     </html>
