@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { CUSTOMMENU } from "../constants";
 import CutomButton from "./customButtons/cutomButton";
+import Link from "next/link";
 
 function Header() {
   const [isOpenMenu, setIsOpenMenu] = useState<boolean>(false);
@@ -33,12 +34,16 @@ function Header() {
       >
         {CUSTOMMENU.map((item) => (
           <div className="sm:my-1 xs:my-1">
-            <span className="cursor-pointer text-[#797979] text-sm hover:text-[#FF7A62]">
-              {item.menu}
-            </span>
+            <Link
+              href={item.menu === "Home" ? "/" : "/" + item.menu.toLowerCase()}
+            >
+              <span className="cursor-pointer text-[#797979] text-sm hover:text-[#FF7A62]">
+                {item.menu}
+              </span>
+            </Link>
           </div>
         ))}
-       <CutomButton label={"Create events"}></CutomButton>
+        <CutomButton label={"Create events"}></CutomButton>
       </div>
     </div>
   );
