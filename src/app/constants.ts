@@ -1,4 +1,3 @@
-
 export const CUSTOMMENU = [
   {
     id: 1,
@@ -79,3 +78,37 @@ export const eventData = [
   },
 ];
 
+export const TestimonialData = [
+  {
+    id: 1,
+    personProfile: "/assets/images/p1.png",
+    rating: 4,
+    Desc: "Being able to instantly see the results that my future employer would see! it definitely gave me a sigh of relief.",
+    name: "Richoil Global",
+    position: "HR Manager",
+  },
+  {
+    id: 2,
+    personProfile: "/assets/images/p2.png",
+    rating: 3,
+    Desc: "I was impressed with how easy it was to navigate through their website and how simple they make it for customers to find what they are looking for ",
+    name: "CItiBank Int",
+    position: "Managing Director",
+  },
+  {
+    id: 3,
+    personProfile: "/assets/images/p3.png",
+    rating: 5,
+    Desc: "Dossr is transparent, mobile optimized workflow, eConsent, and Comments for Context deliver a 95% satisfaction rating ",
+    name: "Delight Customers",
+    position: "Social Communication",
+  },
+  {
+    id: 4,
+    personProfile: "/assets/images/p1.png",
+    rating: 3,
+    Desc: "Dossr is transparent, mobile optimized workflow, eConsent, and Comments for Context deliver a 95% satisfaction rating ",
+    name: "Delight Customers",
+    position: "Social Communication",
+  },
+];

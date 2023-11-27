@@ -9,12 +9,11 @@ function Services() {
         </span>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-10 mt-[80px] my-[80px]">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-10 mt-[80px] my-[80px] wrap">
         <div>
-          <div className="flex justify-center min-h-[280px]">
+          <div className="flex justify-center min-h-[280px] items-center">
             <div className="flex gap-10">
               <img src="/assets/images/services/s1.svg" alt="" />
-              <img src="/assets/images/services/s2.svg" alt="" />
             </div>
           </div>
           <div className="text-center">
@@ -27,15 +26,9 @@ function Services() {
           </div>
         </div>
         <div>
-          <div className="flex justify-center min-h-[280px]">
+          <div className="flex justify-center min-h-[280px] items-center">
             <div>
-              <div className="flex justify-center">
-                <img src="/assets/images/services/s4.svg" alt="" />
-              </div>
-              <div className="flex gap-10">
-                <img src="/assets/images/services/s3.svg" alt="" />
-                <img src="/assets/images/services/s5.svg" alt=""  />
-              </div>
+              <img src="/assets/images/services/s2.svg" alt="" />
             </div>
           </div>
           <div className="text-center">
@@ -48,15 +41,9 @@ function Services() {
           </div>
         </div>
         <div>
-          <div className="flex justify-center min-h-[280px]">
+          <div className="flex justify-center min-h-[280px] items-center">
             <div>
-              <div className="flex justify-center">
-                <img src="/assets/images/services/s7.svg" alt="" />
-              </div>
-              <div className="flex gap-12">
-                <img src="/assets/images/services/s6.svg" alt="" />
-                <img src="/assets/images/services/s8.svg" alt="" />
-              </div>
+              <img src="/assets/images/services/s3.svg" alt="" />
             </div>
           </div>
           <div className="text-center">
