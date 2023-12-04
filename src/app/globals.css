@@ -15,12 +15,27 @@
     --background-end-rgb: 0, 0, 0;
   }
 }
+@font-face {
+  font-family: 'sandbrush';
+  src: url('/assets/sandbrush demo.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'GalanoGrotesque';
+  src: url('/assets/GalanoGrotesqueAltLight.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
 body{
-  font-family: "Galano Grotesque Alt Light";
+  font-family: GalanoGrotesque;
 }
 body::-webkit-scrollbar{
  display: none;
 }
+
+
 
 
 
@@ -40,6 +55,10 @@ body::-webkit-scrollbar{
 }
 
 .font-family{
-  font-family: Sandbrush;
+  font-family: sandbrush;
 }
-
+.background-image{
+  background-image: url("../../public/assets/images/Saly-1.png");
+  background-position: bottom;
+  background-repeat: no-repeat;
+}
