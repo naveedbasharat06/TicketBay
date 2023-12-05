@@ -22,7 +22,6 @@ function Header() {
             width={24}
             onClick={() => {
               isOpenMenu ? setIsOpenMenu(false) : setIsOpenMenu(true);
-              alert("clicked")
             }}
           />
         </div>

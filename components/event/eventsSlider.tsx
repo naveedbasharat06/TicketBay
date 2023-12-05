@@ -24,8 +24,8 @@ function EventsSlider() {
     slidesToScroll: 2,
   };
   return (
-    <div className=" bg-[#E3F5FF] p-10 lg:flex justify-between border rounded-[4px] lg:h-[500px]">
-      <div className="lg:w-[38%]">
+    <div className=" bg-[#E3F5FF] p-10 lg:flex gap-5 justify-between border rounded-[4px] lg:h-[500px]">
+      <div className="lg:w-[35%]">
         <div>
           <span className="font-family text-[48px] font-[400] text-[#FFB922]">
             {specificArray.eventType}
@@ -64,7 +64,7 @@ function EventsSlider() {
           />
         </div>
         <div className="lg:w-[25%] pt-[30px]">
-          <div className="h-[100%]">
+          <div className="h-[100%] ">
             <Slider {...settings}>
               {eventData.map((event, index) => (
                 <div

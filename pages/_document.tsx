@@ -6,12 +6,8 @@ export default function Document() {
     <Html lang="en">
       <Head />
       <body className="pl-8 pr-8">
-        <Header />
         <Main />
         <NextScript />
-        <div className="mt-10">
-          <Footer />
-        </div>
       </body>
     </Html>
   );

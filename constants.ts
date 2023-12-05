@@ -24,6 +24,36 @@ export const CUSTOMMENU = [
     menu: "Login",
   },
 ];
+export const eventsDropDown = [
+  {
+    id: 1,
+    menu: "All",
+  },
+  {
+    id: 2,
+    menu: "Featured",
+  },
+  {
+    id: 3,
+    menu: "Festival",
+  },
+  {
+    id: 4,
+    menu: "Party",
+  },
+];
+
+export type EventType = {
+  id: number;
+  eventThunbnil: string;
+  eventType: string;
+  dateMonth: string;
+  dateDay: string;
+  startingFrom: number;
+  eventdesc: string;
+  longdesc: string;
+  lagos: string;
+};
 
 export const logoData = [
   { id: 1, src: "/assets/images/uba.jpg", alt: "Company 1" },
@@ -40,8 +70,8 @@ export const eventData = [
     id: 1,
     eventThunbnil: "assets/images/event1.png",
     eventType: "Party",
-    dateMonth: "JUN",
-    dateDay: "05",
+    dateMonth: "DEC",
+    dateDay: "08",
     startingFrom: 3000,
     eventdesc: "Happiest One Winterfest 2021",
     longdesc:
@@ -52,7 +82,7 @@ export const eventData = [
     id: 2,
     eventThunbnil: "assets/images/event2.png",
     eventType: "Festival",
-    dateMonth: "JUN",
+    dateMonth: "DEC",
     dateDay: "06",
     startingFrom: 15000,
     eventdesc: "Happiest One Winterfest 2022",
@@ -360,8 +390,523 @@ export const eventData = [
       "Coachable and passionate about collaborating with a team when working on projects",
     lagos: "10 Pm",
   },
- 
+  {
+    id: 29,
+    eventThunbnil: "assets/images/event1.png",
+    eventType: "Festival",
+    dateMonth: "JUN",
+    dateDay: "06",
+    startingFrom: 15000,
+    eventdesc: "Happiest One Winterfest 2022",
+    longdesc:
+      "Coachable and passionate about collaborating with a team when working on projects",
+    lagos: "8 Pm",
+  },
+  {
+    id: 30,
+    eventThunbnil: "assets/images/event2.png",
+    eventType: "Festival",
+    dateMonth: "JUN",
+    dateDay: "07",
+    startingFrom: 5600,
+    eventdesc: "Happiest One Winterfest 2023",
+    longdesc:
+      "Coachable and passionate about collaborating with a team when working on projects",
+    lagos: "9 Pm",
+  },
+  {
+    id: 31,
+    eventThunbnil: "assets/images/event1.png",
+    eventType: "Festival",
+    dateMonth: "JUN",
+    dateDay: "10",
+    startingFrom: 8000,
+    eventdesc: "Happiest One Winterfest 2024",
+    longdesc:
+      "Coachable and passionate about collaborating with a team when working on projects",
+    lagos: "10 Pm",
+  },
+  {
+    id: 32,
+    eventThunbnil: "assets/images/event2.png",
+    eventType: "Festival",
+    dateMonth: "JUN",
+    dateDay: "10",
+    startingFrom: 8000,
+    eventdesc: "Happiest One Winterfest 2024",
+    longdesc:
+      "Coachable and passionate about collaborating with a team when working on projects",
+    lagos: "10 Pm",
+  },
+  {
+    id: 33,
+    eventThunbnil: "assets/images/event1.png",
+    eventType: "Festival",
+    dateMonth: "JUN",
+    dateDay: "10",
+    startingFrom: 8000,
+    eventdesc: "Happiest One Winterfest 2024",
+    longdesc:
+      "Coachable and passionate about collaborating with a team when working on projects",
+    lagos: "10 Pm",
+  },
+  {
+    id: 34,
+    eventThunbnil: "assets/images/event2.png",
+    eventType: "Festival",
+    dateMonth: "JUN",
+    dateDay: "10",
+    startingFrom: 8000,
+    eventdesc: "Happiest One Winterfest 2024",
+    longdesc:
+      "Coachable and passionate about collaborating with a team when working on projects",
+    lagos: "10 Pm",
+  },
+  {
+    id: 35,
+    eventThunbnil: "assets/images/event1.png",
+    eventType: "Festival",
+    dateMonth: "JUN",
+    dateDay: "10",
+    startingFrom: 8000,
+    eventdesc: "Happiest One Winterfest 2024",
+    longdesc:
+      "Coachable and passionate about collaborating with a team when working on projects",
+    lagos: "10 Pm",
+  },
+  {
+    id: 36,
+    eventThunbnil: "assets/images/event1.png",
+    eventType: "Festival",
+    dateMonth: "JUN",
+    dateDay: "10",
+    startingFrom: 8000,
+    eventdesc: "Happiest One Winterfest 2024",
+    longdesc:
+      "Coachable and passionate about collaborating with a team when working on projects",
+    lagos: "10 Pm",
+  },
+  {
+    id: 37,
+    eventThunbnil: "assets/images/event2.png",
+    eventType: "Festival",
+    dateMonth: "JUN",
+    dateDay: "10",
+    startingFrom: 8000,
+    eventdesc: "Happiest One Winterfest 2024",
+    longdesc:
+      "Coachable and passionate about collaborating with a team when working on projects",
+    lagos: "10 Pm",
+  },
+  {
+    id: 38,
+    eventThunbnil: "assets/images/event1.png",
+    eventType: "Festival",
+    dateMonth: "JUN",
+    dateDay: "10",
+    startingFrom: 8000,
+    eventdesc: "Happiest One Winterfest 2024",
+    longdesc:
+      "Coachable and passionate about collaborating with a team when working on projects",
+    lagos: "10 Pm",
+  },
+  {
+    id: 39,
+    eventThunbnil: "assets/images/event2.png",
+    eventType: "Festival",
+    dateMonth: "JUN",
+    dateDay: "10",
+    startingFrom: 8000,
+    eventdesc: "Happiest One Winterfest 2024",
+    longdesc:
+      "Coachable and passionate about collaborating with a team when working on projects",
+    lagos: "10 Pm",
+  },
   
+  {
+    id: 40,
+    eventThunbnil: "assets/images/event1.png",
+    eventType: "Party",
+    dateMonth: "DEC",
+    dateDay: "08",
+    startingFrom: 3000,
+    eventdesc: "Happiest One Winterfest 2021",
+    longdesc:
+      "Coachable and passionate about collaborating with a team when working on projects",
+    lagos: "7 Pm",
+  },
+  {
+    id: 41,
+    eventThunbnil: "assets/images/event2.png",
+    eventType: "Festival",
+    dateMonth: "DEC",
+    dateDay: "06",
+    startingFrom: 15000,
+    eventdesc: "Happiest One Winterfest 2022",
+    longdesc:
+      "Coachable and passionate about collaborating with a team when working on projects",
+    lagos: "8 Pm",
+  },
+  {
+    id: 42,
+    eventThunbnil: "assets/images/event1.png",
+    eventType: "Festival",
+    dateMonth: "Sep",
+    dateDay: "14",
+    startingFrom: 5600,
+    eventdesc: "Happiest One Winterfest 2023",
+    longdesc:
+      "Coachable and passionate about collaborating with a team when working on projects",
+    lagos: "9 Pm",
+  },
+  {
+    id: 43,
+    eventThunbnil: "assets/images/event2.png",
+    eventType: "Featured",
+    dateMonth: "Sep",
+    dateDay: "20",
+    startingFrom: 8000,
+    eventdesc: "Happiest One Winterfest 2024",
+    longdesc:
+      "Coachable and passionate about collaborating with a team when working on projects",
+    lagos: "10 Pm",
+  },
+  {
+    id: 44,
+    eventThunbnil: "assets/images/event1.png",
+    eventType: "Party",
+    dateMonth: "JUN",
+    dateDay: "10",
+    startingFrom: 1000,
+    eventdesc: "Happiest One Winterfest 2025",
+    longdesc:
+      "Coachable and passionate about collaborating with a team when working on projects",
+    lagos: "10 Pm",
+  },
+  {
+    id: 6,
+    eventThunbnil: "assets/images/event2.png",
+    eventType: "Festival",
+    dateMonth: "JUN",
+    dateDay: "05",
+    startingFrom: 3000,
+    eventdesc: "Happiest One Winterfest 2021",
+    longdesc:
+      "Coachable and passionate about collaborating with a team when working on projects",
+    lagos: "7 Pm",
+  },
+  {
+    id: 45,
+    eventThunbnil: "assets/images/event1.png",
+    eventType: "Party",
+    dateMonth: "JUN",
+    dateDay: "06",
+    startingFrom: 15000,
+    eventdesc: "Happiest One Winterfest 2022",
+    longdesc:
+      "Coachable and passionate about collaborating with a team when working on projects",
+    lagos: "8 Pm",
+  },
+  {
+    id: 46,
+    eventThunbnil: "assets/images/event2.png",
+    eventType: "Festival",
+    dateMonth: "Sep",
+    dateDay: "12",
+    startingFrom: 5600,
+    eventdesc: "Happiest One Winterfest 2023",
+    longdesc:
+      "Coachable and passionate about collaborating with a team when working on projects",
+    lagos: "9 Pm",
+  },
+  {
+    id: 47,
+    eventThunbnil: "assets/images/event1.png",
+    eventType: "Party",
+    dateMonth: "Sep",
+    dateDay: "15",
+    startingFrom: 8000,
+    eventdesc: "Happiest One Winterfest 2024",
+    longdesc:
+      "Coachable and passionate about collaborating with a team when working on projects",
+    lagos: "10 Pm",
+  },
+  {
+    id: 48,
+    eventThunbnil: "assets/images/event2.png",
+    eventType: "Festival",
+    dateMonth: "JUN",
+    dateDay: "10",
+    startingFrom: 1000,
+    eventdesc: "Happiest One Winterfest 2025",
+    longdesc:
+      "Coachable and passionate about collaborating with a team when working on projects",
+    lagos: "10 Pm",
+  },
+  {
+    id: 49,
+    eventThunbnil: "assets/images/event1.png",
+    eventType: "Featured",
+    dateMonth: "JUN",
+    dateDay: "05",
+    startingFrom: 3000,
+    eventdesc: "Happiest One Winterfest 2021",
+    longdesc:
+      "Coachable and passionate about collaborating with a team when working on projects",
+    lagos: "7 Pm",
+  },
+  {
+    id: 50,
+    eventThunbnil: "assets/images/event2.png",
+    eventType: "Festival",
+    dateMonth: "JUN",
+    dateDay: "06",
+    startingFrom: 15000,
+    eventdesc: "Happiest One Winterfest 2022",
+    longdesc:
+      "Coachable and passionate about collaborating with a team when working on projects",
+    lagos: "8 Pm",
+  },
+  {
+    id: 51,
+    eventThunbnil: "assets/images/event1.png",
+    eventType: "Featured",
+    dateMonth: "JUN",
+    dateDay: "07",
+    startingFrom: 5600,
+    eventdesc: "Happiest One Winterfest 2023",
+    longdesc:
+      "Coachable and passionate about collaborating with a team when working on projects",
+    lagos: "9 Pm",
+  },
+  {
+    id: 52,
+    eventThunbnil: "assets/images/event2.png",
+    eventType: "Festival",
+    dateMonth: "JUN",
+    dateDay: "10",
+    startingFrom: 8000,
+    eventdesc: "Happiest One Winterfest 2024",
+    longdesc:
+      "Coachable and passionate about collaborating with a team when working on projects",
+    lagos: "10 Pm",
+  },
+  {
+    id: 53,
+    eventThunbnil: "assets/images/event1.png",
+    eventType: "Festival",
+    dateMonth: "JUN",
+    dateDay: "10",
+    startingFrom: 1000,
+    eventdesc: "Happiest One Winterfest 2025",
+    longdesc:
+      "Coachable and passionate about collaborating with a team when working on projects",
+    lagos: "10 Pm",
+  },
+  {
+    id: 54,
+    eventThunbnil: "assets/images/event2.png",
+    eventType: "Featured",
+    dateMonth: "JUN",
+    dateDay: "05",
+    startingFrom: 3000,
+    eventdesc: "Happiest One Winterfest 2021",
+    longdesc:
+      "Coachable and passionate about collaborating with a team when working on projects",
+    lagos: "7 Pm",
+  },
+  {
+    id: 55,
+    eventThunbnil: "assets/images/event1.png",
+    eventType: "Festival",
+    dateMonth: "JUN",
+    dateDay: "06",
+    startingFrom: 15000,
+    eventdesc: "Happiest One Winterfest 2022",
+    longdesc:
+      "Coachable and passionate about collaborating with a team when working on projects",
+    lagos: "8 Pm",
+  },
+  {
+    id: 56,
+    eventThunbnil: "assets/images/event2.png",
+    eventType: "Festival",
+    dateMonth: "JUN",
+    dateDay: "07",
+    startingFrom: 5600,
+    eventdesc: "Happiest One Winterfest 2023",
+    longdesc:
+      "Coachable and passionate about collaborating with a team when working on projects",
+    lagos: "9 Pm",
+  },
+  {
+    id: 57,
+    eventThunbnil: "assets/images/event1.png",
+    eventType: "Festival",
+    dateMonth: "JUN",
+    dateDay: "10",
+    startingFrom: 8000,
+    eventdesc: "Happiest One Winterfest 2024",
+    longdesc:
+      "Coachable and passionate about collaborating with a team when working on projects",
+    lagos: "10 Pm",
+  },
+  {
+    id: 58,
+    eventThunbnil: "assets/images/event2.png",
+    eventType: "Festival",
+    dateMonth: "JUN",
+    dateDay: "10",
+    startingFrom: 8000,
+    eventdesc: "Happiest One Winterfest 2024",
+    longdesc:
+      "Coachable and passionate about collaborating with a team when working on projects",
+    lagos: "10 Pm",
+  },
+  {
+    id: 59,
+    eventThunbnil: "assets/images/event1.png",
+    eventType: "Festival",
+    dateMonth: "JUN",
+    dateDay: "10",
+    startingFrom: 8000,
+    eventdesc: "Happiest One Winterfest 2024",
+    longdesc:
+      "Coachable and passionate about collaborating with a team when working on projects",
+    lagos: "10 Pm",
+  },
+  {
+    id: 60,
+    eventThunbnil: "assets/images/event2.png",
+    eventType: "Festival",
+    dateMonth: "JUN",
+    dateDay: "10",
+    startingFrom: 8000,
+    eventdesc: "Happiest One Winterfest 2024",
+    longdesc:
+      "Coachable and passionate about collaborating with a team when working on projects",
+    lagos: "10 Pm",
+  },
+  {
+    id: 61,
+    eventThunbnil: "assets/images/event1.png",
+    eventType: "Festival",
+    dateMonth: "JUN",
+    dateDay: "10",
+    startingFrom: 8000,
+    eventdesc: "Happiest One Winterfest 2024",
+    longdesc:
+      "Coachable and passionate about collaborating with a team when working on projects",
+    lagos: "10 Pm",
+  },
+  {
+    id: 62,
+    eventThunbnil: "assets/images/event1.png",
+    eventType: "Festival",
+    dateMonth: "JUN",
+    dateDay: "10",
+    startingFrom: 8000,
+    eventdesc: "Happiest One Winterfest 2024",
+    longdesc:
+      "Coachable and passionate about collaborating with a team when working on projects",
+    lagos: "10 Pm",
+  },
+  {
+    id: 63,
+    eventThunbnil: "assets/images/event2.png",
+    eventType: "Festival",
+    dateMonth: "JUN",
+    dateDay: "10",
+    startingFrom: 8000,
+    eventdesc: "Happiest One Winterfest 2024",
+    longdesc:
+      "Coachable and passionate about collaborating with a team when working on projects",
+    lagos: "10 Pm",
+  },
+  {
+    id: 64,
+    eventThunbnil: "assets/images/event1.png",
+    eventType: "Festival",
+    dateMonth: "JUN",
+    dateDay: "10",
+    startingFrom: 8000,
+    eventdesc: "Happiest One Winterfest 2024",
+    longdesc:
+      "Coachable and passionate about collaborating with a team when working on projects",
+    lagos: "10 Pm",
+  },
+  {
+    id: 65,
+    eventThunbnil: "assets/images/event2.png",
+    eventType: "Festival",
+    dateMonth: "JUN",
+    dateDay: "10",
+    startingFrom: 8000,
+    eventdesc: "Happiest One Winterfest 2024",
+    longdesc:
+      "Coachable and passionate about collaborating with a team when working on projects",
+    lagos: "10 Pm",
+  },
+  {
+    id: 66,
+    eventThunbnil: "assets/images/event1.png",
+    eventType: "Festival",
+    dateMonth: "JUN",
+    dateDay: "06",
+    startingFrom: 15000,
+    eventdesc: "Happiest One Winterfest 2022",
+    longdesc:
+      "Coachable and passionate about collaborating with a team when working on projects",
+    lagos: "8 Pm",
+  },
+  {
+    id: 67,
+    eventThunbnil: "assets/images/event2.png",
+    eventType: "Festival",
+    dateMonth: "JUN",
+    dateDay: "07",
+    startingFrom: 5600,
+    eventdesc: "Happiest One Winterfest 2023",
+    longdesc:
+      "Coachable and passionate about collaborating with a team when working on projects",
+    lagos: "9 Pm",
+  },
+  {
+    id: 68,
+    eventThunbnil: "assets/images/event1.png",
+    eventType: "Festival",
+    dateMonth: "JUN",
+    dateDay: "10",
+    startingFrom: 8000,
+    eventdesc: "Happiest One Winterfest 2024",
+    longdesc:
+      "Coachable and passionate about collaborating with a team when working on projects",
+    lagos: "10 Pm",
+  },
+  {
+    id: 69,
+    eventThunbnil: "assets/images/event2.png",
+    eventType: "Festival",
+    dateMonth: "JUN",
+    dateDay: "10",
+    startingFrom: 8000,
+    eventdesc: "Happiest One Winterfest 2024",
+    longdesc:
+      "Coachable and passionate about collaborating with a team when working on projects",
+    lagos: "10 Pm",
+  },
+  {
+    id: 70,
+    eventThunbnil: "assets/images/event1.png",
+    eventType: "Festival",
+    dateMonth: "JUN",
+    dateDay: "10",
+    startingFrom: 8000,
+    eventdesc: "Happiest One Winterfest 2024",
+    longdesc:
+      "Coachable and passionate about collaborating with a team when working on projects",
+    lagos: "10 Pm",
+  },  
 
 ];
 
