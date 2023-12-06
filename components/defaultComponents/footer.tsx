@@ -4,7 +4,7 @@ function Footer() {
     <>
       <div className="md:flex justify-between ">
         <div>
-          <img src="./assets/images/logo.png" alt="logo" width={110} />
+          <img src="/assets/images/logo.png" alt="logo" width={110} />
           <p className="max-w-[355px] text-sm font-medium text-[#797979]">
             Ticketbay.com.ng is an Innovative, secure and user friendly Event
             ticketing platform in Nigeria, built to provide every user with a
@@ -12,16 +12,16 @@ function Footer() {
           </p>
           <div className="mt-6 flex gap-5">
             <div>
-              <img src="./assets/images/instagram.svg" alt="social-icon" className="cursor-pointer" />
+              <img src="/assets/images/instagram.svg" alt="social-icon" className="cursor-pointer" />
             </div>
             <div>
-              <img src="./assets/images/facebook.svg" alt="social-icon" className="cursor-pointer" />
+              <img src="/assets/images/facebook.svg" alt="social-icon" className="cursor-pointer" />
             </div>
             <div>
-              <img src="./assets/images/vector.svg" alt="social-icon" className="cursor-pointer" />
+              <img src="/assets/images/vector.svg" alt="social-icon" className="cursor-pointer" />
             </div>
             <div>
-              <img src="./assets/images/youtube.svg" alt="social-icon" className="cursor-pointer" />
+              <img src="/assets/images/youtube.svg" alt="social-icon" className="cursor-pointer" />
             </div>
           </div>
         </div>

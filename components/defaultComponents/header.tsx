@@ -9,14 +9,14 @@ function Header() {
     <div className="sticky top-[0px] h-[58px] lg:flex items-center justify-between bg-[white] z-50">
       <div className="flex justify-between items-center">
         <div>
-          <img src="./assets/images/logo.png" alt="" width={110} />
+          <img src="/assets/images/logo.png" alt="" width={110} />
         </div>
         <div className="lg:hidden xl:hidden">
           <img
             src={
               isOpenMenu
-                ? "./assets/images/close.svg"
-                : "./assets/images/menu.svg"
+                ? "/assets/images/close.svg"
+                : "/assets/images/menu.svg"
             }
             alt="icon"
             width={24}
