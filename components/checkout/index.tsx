@@ -1,8 +1,11 @@
-import React, { FC } from "react";
-import eventData from "@/constants";
+import React, { FC, useState } from "react";
+import { eventData, initialBookingState, recipientState } from "@/constants";
 import CutomButton from "../defaultComponents/customButtons/cutomButton";
 import NewsLetter from "../defaultComponents/newsLetter";
 import { useMedia } from "react-use";
+import bookingsStore from "@/store/bookings.store";
+import { v4 as uuidv4 } from "uuid";
+import { toast } from "react-hot-toast";
 
 interface props {
   id?: any;
@@ -12,6 +15,66 @@ const TicketSummury: FC<props> = ({ id }) => {
   const isSmallScreen = useMedia("(max-width: 600px)");
   const isMediumScreen = useMedia("(min-width: 601px) and (max-width: 1023px)");
   const singleEvent = eventData.filter((item) => item.id === parseInt(id));
+  const [bookings, setBookings] = useState(initialBookingState);
+  const [recipient, setRecipient] = useState(recipientState);
+
+  // console.log("bookings", JSON.parse(JSON.stringify(bookingsStore.bookings)));
+  const inputFieldChange = (e: any) => {
+    const { name, value } = e.target;
+    // If the property is inside ticketDetails, update it accordingly
+    if (name.startsWith("ticketDetails.")) {
+      const ticketDetailsField = name.split(".")[1];
+      setRecipient((prevFormData) => ({
+        ...prevFormData,
+        [ticketDetailsField]: value,
+      }));
+    } else {
+      // If not inside ticketDetails, update the main state
+      setBookings((prevFormData) => ({
+        ...prevFormData,
+        [name]: value,
+      }));
+    }
+  };
+
+  const createBooking = () => {
+    if (validateContactForm()) {
+      bookingsStore.addBooking({
+        ...bookings,
+        id: uuidv4(),
+      });
+      toast.success("Booking created.");
+    } else {
+      toast.error("Please fill all fields.");
+    }
+  };
+
+  const addRecipient = () => {
+    if (validateRecipient()) {
+      setBookings((prevBookings) => ({
+        ...prevBookings,
+        recipient: [...prevBookings.recipient, { ...recipient, id: uuidv4() }],
+      }));
+      setRecipient(recipientState);
+      toast.success("Recipient created.");
+    } else {
+      toast.error("Please fill all fields.");
+    }
+  };
+
+  const validateContactForm = () =>
+    Object.entries(bookings).every(
+      ([key, value]) =>
+        key === "id" ||
+        key === "userId" ||
+        (key !== "id" && key !== "userId" && value !== "")
+    );
+
+  const validateRecipient = () =>
+    Object.entries(recipient).every(
+      ([key, value]) => key === "id" || (key !== "id" && value !== "")
+    );
+
   return (
     <div>
       <div className="lg:grid  grid-cols-3">
@@ -118,9 +181,14 @@ const TicketSummury: FC<props> = ({ id }) => {
                   <input
                     type="text"
                     placeholder="First name *"
+                    name="firstName"
+                    required
                     className="outline-none"
+                    value={bookings.firstName}
+                    onChange={inputFieldChange}
                   />
                 </div>
+
                 <div
                   className={`border border-[#97979730] h-[48px] lg:w-[320px] flex items-center rounded-[4px] pl-5 pr-5 ${
                     isSmallScreen || isMediumScreen ? "mt-8" : null
@@ -129,7 +197,11 @@ const TicketSummury: FC<props> = ({ id }) => {
                   <input
                     type="text"
                     placeholder="Last name *"
+                    required
                     className="outline-none"
+                    name="lastName"
+                    value={bookings.lastName}
+                    onChange={inputFieldChange}
                   />
                 </div>
               </div>
@@ -137,9 +209,13 @@ const TicketSummury: FC<props> = ({ id }) => {
               <div className="lg:flex gap-10 mt-8">
                 <div className="border border-[#97979730] h-[48px] lg:w-[320px] flex items-center rounded-[4px] pl-5 pr-5">
                   <input
-                    type="text"
+                    type="email"
                     placeholder="Email Address *"
                     className="outline-none"
+                    required
+                    name="email"
+                    value={bookings.email}
+                    onChange={inputFieldChange}
                   />
                 </div>
                 <div
@@ -148,9 +224,13 @@ const TicketSummury: FC<props> = ({ id }) => {
                   }`}
                 >
                   <input
-                    type="text"
+                    type="email"
                     placeholder="Confirm Email Address *"
                     className="outline-none"
+                    name="confirmEmail"
+                    required
+                    value={bookings.confirmEmail}
+                    onChange={inputFieldChange}
                   />
                 </div>
               </div>
@@ -176,6 +256,10 @@ const TicketSummury: FC<props> = ({ id }) => {
                     type="text"
                     placeholder="First name *"
                     className="outline-none"
+                    required
+                    name="ticketDetails.firstName"
+                    value={recipient.firstName}
+                    onChange={inputFieldChange}
                   />
                 </div>
                 <div
@@ -187,6 +271,10 @@ const TicketSummury: FC<props> = ({ id }) => {
                     type="text"
                     placeholder="Last name *"
                     className="outline-none"
+                    required
+                    name="ticketDetails.lastName"
+                    value={recipient.lastName}
+                    onChange={inputFieldChange}
                   />
                 </div>
               </div>
@@ -194,9 +282,13 @@ const TicketSummury: FC<props> = ({ id }) => {
               <div className="lg:flex gap-10 mt-8">
                 <div className="border border-[#97979730] h-[48px] lg:w-[320px] flex items-center rounded-[4px] pl-5 pr-5">
                   <input
-                    type="text"
+                    type="email"
                     placeholder="Email Address *"
                     className="outline-none"
+                    required
+                    name="ticketDetails.email"
+                    value={recipient.email}
+                    onChange={inputFieldChange}
                   />
                 </div>
                 <div
@@ -205,15 +297,22 @@ const TicketSummury: FC<props> = ({ id }) => {
                   }`}
                 >
                   <input
-                    type="text"
+                    type="phone"
                     placeholder="Phone number *"
                     className="outline-none"
+                    required
+                    name="ticketDetails.phone"
+                    value={recipient.phone}
+                    onChange={inputFieldChange}
                   />
                 </div>
               </div>
             </div>
 
-            <div className="h-[48px] w-[135px] border border-[#FD2F09] rounded-[4px] flex justify-center items-center mt-7 cursor-pointer">
+            <div
+              className="h-[48px] w-[135px] border border-[#FD2F09] rounded-[4px] flex justify-center items-center mt-7 cursor-pointer"
+              onClick={addRecipient}
+            >
               <span className="text-[14px] font-[500] text-[#FD2F09]">
                 Add recipient
               </span>
@@ -326,7 +425,11 @@ const TicketSummury: FC<props> = ({ id }) => {
                       type="text"
                       placeholder="Enter Coupon"
                       className={`outline-none ${
-                        isSmallScreen ? "w-[150px]" : isMediumScreen?"w-[100px]":"w-[170px]"
+                        isSmallScreen
+                          ? "w-[150px]"
+                          : isMediumScreen
+                          ? "w-[100px]"
+                          : "w-[170px]"
                       }`}
                     />
                   </div>
@@ -339,7 +442,7 @@ const TicketSummury: FC<props> = ({ id }) => {
           </div>
         </div>
       </div>
-      <div className="mt-10">
+      <div className="mt-10" onClick={createBooking}>
         <CutomButton label={"Continue to payment"}></CutomButton>
       </div>
       <div>

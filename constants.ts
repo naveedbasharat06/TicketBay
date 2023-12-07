@@ -1,3 +1,40 @@
+const ID = "id";
+const USERID = "userId";
+const FIRST_NAME = "firstName";
+const LAST_NAME = "lastName";
+const EMAIL = "email";
+const CONFIRM_EMAIL = "confirmEmail";
+const RECIPIENT = "recipient";
+const RECIPIENT_ID = "id";
+const RECIPIENT_FIRST_NAME = "firstName";
+const RECIPIENT_LAST_NAME = "lastName";
+const RECIPIENT_EMAIL = "email";
+const RECIPIENT_PHONE = "phone";
+
+export const initialBookingState = {
+  [ID]: "",
+  [USERID]:"1234",
+  [FIRST_NAME]: "",
+  [LAST_NAME]: "",
+  [EMAIL]: "",
+  [CONFIRM_EMAIL]: "",
+  [RECIPIENT]: [] as {
+    id: string;
+    firstName: string;
+    lastName: string;
+    email: string;
+    phone: string;
+  }[],
+};
+
+export const recipientState = {
+  [RECIPIENT_ID]: "",
+  [RECIPIENT_FIRST_NAME]: "",
+  [RECIPIENT_LAST_NAME]: "",
+  [RECIPIENT_EMAIL]: "",
+  [RECIPIENT_PHONE]: "",
+};
+
 export const CUSTOMMENU = [
   {
     id: 1,
