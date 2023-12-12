@@ -9,31 +9,31 @@ class BookingsStore {
       addBooking: action,
       removeBooking: action,
     });
-    // this.loadFromLocalStorage();
+    this.loadFromLocalStorage();
   }
 
   addBooking(booking: any) {
     this.bookings.push(booking);
-    // this.saveToLocalStorage();
+    this.saveToLocalStorage();
   }
 
   removeBooking(bookingId: string) {
     this.bookings = this.bookings.filter((booking) => booking.id !== bookingId);
-    // this.saveToLocalStorage();
+    this.saveToLocalStorage();
   }
 
-//   saveToLocalStorage() {
-//     localStorage.setItem("bookings", JSON.stringify(this.bookings));
-//   }
+  saveToLocalStorage() {
+    localStorage.setItem("bookings", JSON.stringify(this.bookings));
+  }
 
-//   loadFromLocalStorage() {
-//     if (typeof localStorage !== 'undefined') {
-//       const storedBookings = localStorage.getItem("bookings");
-//       if (storedBookings) {
-//         this.bookings = JSON.parse(storedBookings);
-//       }
-//     }
-//   }
+  loadFromLocalStorage() {
+    if (typeof localStorage !== 'undefined') {
+      const storedBookings = localStorage.getItem("bookings");
+      if (storedBookings) {
+        this.bookings = JSON.parse(storedBookings);
+      }
+    }
+  }
   
 }
 

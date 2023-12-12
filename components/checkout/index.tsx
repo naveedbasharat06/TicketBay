@@ -6,6 +6,7 @@ import { useMedia } from "react-use";
 import bookingsStore from "@/store/bookings.store";
 import { v4 as uuidv4 } from "uuid";
 import { toast } from "react-hot-toast";
+import { useRouter as useNavigation } from "next/navigation";
 
 interface props {
   id?: any;
@@ -17,8 +18,11 @@ const TicketSummury: FC<props> = ({ id }) => {
   const singleEvent = eventData.filter((item) => item.id === parseInt(id));
   const [bookings, setBookings] = useState(initialBookingState);
   const [recipient, setRecipient] = useState(recipientState);
+  const [eventUpdate, setEventUpdate] = useState(false);
+  const [newsUpdate, setNewsUpdate] = useState(false);
+  const navigation = useNavigation();
 
-  // console.log("bookings", JSON.parse(JSON.stringify(bookingsStore.bookings)));
+  console.log("bookings", JSON.parse(JSON.stringify(bookingsStore.bookings)));
   const inputFieldChange = (e: any) => {
     const { name, value } = e.target;
     // If the property is inside ticketDetails, update it accordingly
@@ -37,13 +41,25 @@ const TicketSummury: FC<props> = ({ id }) => {
     }
   };
 
+  const CheckboxChange = (parm: any) => {
+    if (parm === 1) {
+      setNewsUpdate(!newsUpdate); // Toggle the value
+    } else if (parm === 2) {
+      setEventUpdate(!eventUpdate); // Toggle the value
+    }
+  };
   const createBooking = () => {
+    const uuid = uuidv4();
     if (validateContactForm()) {
       bookingsStore.addBooking({
         ...bookings,
-        id: uuidv4(),
+        id: uuid,
+        eventId: id,
+        newsUpdate: newsUpdate,
+        eventUpdate: eventUpdate,
       });
       toast.success("Booking created.");
+      navigation.push(`booking?id=${uuid}`);
     } else {
       toast.error("Please fill all fields.");
     }
@@ -67,7 +83,8 @@ const TicketSummury: FC<props> = ({ id }) => {
       ([key, value]) =>
         key === "id" ||
         key === "userId" ||
-        (key !== "id" && key !== "userId" && value !== "")
+        key === "eventId" ||
+        (key !== "id" && key !== "eventId" && key !== "userId" && value !== "")
     );
 
   const validateRecipient = () =>
@@ -323,7 +340,7 @@ const TicketSummury: FC<props> = ({ id }) => {
                 <input
                   type="checkbox"
                   className="checkbox-color checkbox"
-                  // onChange={}
+                  onChange={() => CheckboxChange(1)}
                 />
               </div>
 
@@ -338,7 +355,7 @@ const TicketSummury: FC<props> = ({ id }) => {
                 <input
                   type="checkbox"
                   className="checkbox-color checkbox"
-                  // onChange={}
+                  onChange={() => CheckboxChange(2)}
                 />
               </div>
 
@@ -442,8 +459,10 @@ const TicketSummury: FC<props> = ({ id }) => {
           </div>
         </div>
       </div>
-      <div className="mt-10" onClick={createBooking}>
-        <CutomButton label={"Continue to payment"}></CutomButton>
+      <div className="flex justify-center">
+        <div className="mt-10 w-fit" onClick={createBooking}>
+          <CutomButton label={"Continue to payment"}></CutomButton>
+        </div>
       </div>
       <div>
         <NewsLetter></NewsLetter>
