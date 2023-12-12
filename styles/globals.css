@@ -62,3 +62,52 @@ body::-webkit-scrollbar{
   background-position: bottom;
   background-repeat: no-repeat;
 }
+.checkbox {
+  /* Add if not using autoprefixer */
+  -webkit-appearance: none;
+  @apply m-0 border-[0.15em] border-[--form-control-color] w-[1.15em] translate-y-[-0.075em] appearance-none place-content-center grid h-[1.15em] text-[--form-control-color] bg-[--form-background] rounded-[0.15em];
+  &::before {
+    content: "";
+    clip-path: polygon(12% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+    transform: scale(0);
+    transform-origin: bottom left;
+    transition: 120ms transform ease-in-out;
+    box-shadow: inset 1em 1em var(--form-control-color);
+
+    @apply w-[0.65em] h-[0.65em];
+  }
+  &:checked::before {
+    transform: scale(1);
+  }
+  &:focus {
+    outline: max(2px, 0.15em) solid currentColor;
+    outline-offset: max(2px, 0.15em);
+  }
+
+  &:disabled {
+    --form-control-color: var(--form-control-disabled);
+    border: 0.15em solid var(--form-control-disabled);
+    color: var(--form-control-disabled);
+    cursor: not-allowed;
+  }
+
+  &:disabled::before {
+    box-shadow: inset 1em 1em var(--form-control-disabled);
+  }
+}
+.checkbox-color {
+  border-color: #FD2F09 !important;
+  color: transparent !important;
+  height: 18px;
+  width: 18px;
+}
+
+  .checkbox-color:checked {
+    background-color: #FD2F09 !important;
+    border-color: #FD2F09 !important;
+  }
+
+  .checkbox-color:checked::before {
+    box-shadow: inset 1em 1em #fff !important;
+  }
+

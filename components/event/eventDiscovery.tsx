@@ -3,6 +3,7 @@ import { eventsDropDown, eventData, EventType } from "@/constants";
 import EventCard from "../landingPage/components/eventCard";
 import Pagination from "./customComponents/customPagination";
 import { useMedia } from "react-use";
+import { useRouter as useNavigation } from "next/navigation";
 
 function EventDiscovery() {
   const isSmallScreen = useMedia("(max-width: 600px)");
@@ -13,6 +14,7 @@ function EventDiscovery() {
   const [currentPage, setCurrentPage] = useState(1);
   const [eventsPerPage, setEventsPerPage] = useState(5);
   const [activeFilter, setActiveFilter] = useState(1);
+  const navigation = useNavigation();
   const applySortingAndFiltering = () => {
     let sortedEvents = [];
     // Apply sorting
@@ -28,13 +30,19 @@ function EventDiscovery() {
     let filteredEvents = sortedEvents;
     switch (activeFilter) {
       case 2:
-        filteredEvents = sortedEvents.filter((item: any) => item.eventType === "Featured");
+        filteredEvents = sortedEvents.filter(
+          (item: any) => item.eventType === "Featured"
+        );
         break;
       case 3:
-        filteredEvents = sortedEvents.filter((item: any) => item.eventType === "Festival");
+        filteredEvents = sortedEvents.filter(
+          (item: any) => item.eventType === "Festival"
+        );
         break;
       case 4:
-        filteredEvents = sortedEvents.filter((item: any) => item.eventType === "Party");
+        filteredEvents = sortedEvents.filter(
+          (item: any) => item.eventType === "Party"
+        );
         break;
       default:
         // If no matching case is found, use the original sortedEvents
@@ -209,7 +217,12 @@ function EventDiscovery() {
       <hr className="h-[2px] mt-1 bg-[#E3F5FF]" />
       <div className="grid lg:grid-cols-4 md:grid-cols-3 gap-5">
         {currentEvents.map((event) => (
-          <div>
+          <div
+            className="cursor-pointer"
+            onClick={() => {
+              navigation.push(`events/checkout?id=${event.id}`);
+            }}
+          >
             <EventCard event={event} />
           </div>
         ))}

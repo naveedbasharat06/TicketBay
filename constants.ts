@@ -1,3 +1,40 @@
+const ID = "id";
+const USERID = "userId";
+const FIRST_NAME = "firstName";
+const LAST_NAME = "lastName";
+const EMAIL = "email";
+const CONFIRM_EMAIL = "confirmEmail";
+const RECIPIENT = "recipient";
+const RECIPIENT_ID = "id";
+const RECIPIENT_FIRST_NAME = "firstName";
+const RECIPIENT_LAST_NAME = "lastName";
+const RECIPIENT_EMAIL = "email";
+const RECIPIENT_PHONE = "phone";
+
+export const initialBookingState = {
+  [ID]: "",
+  [USERID]:"1234",
+  [FIRST_NAME]: "",
+  [LAST_NAME]: "",
+  [EMAIL]: "",
+  [CONFIRM_EMAIL]: "",
+  [RECIPIENT]: [] as {
+    id: string;
+    firstName: string;
+    lastName: string;
+    email: string;
+    phone: string;
+  }[],
+};
+
+export const recipientState = {
+  [RECIPIENT_ID]: "",
+  [RECIPIENT_FIRST_NAME]: "",
+  [RECIPIENT_LAST_NAME]: "",
+  [RECIPIENT_EMAIL]: "",
+  [RECIPIENT_PHONE]: "",
+};
+
 export const CUSTOMMENU = [
   {
     id: 1,
@@ -68,7 +105,7 @@ export const logoData = [
 export const eventData = [
   {
     id: 1,
-    eventThunbnil: "assets/images/event1.png",
+    eventThunbnil: "/assets/images/event1.png",
     eventType: "Party",
     dateMonth: "DEC",
     dateDay: "08",
@@ -77,10 +114,11 @@ export const eventData = [
     longdesc:
       "Coachable and passionate about collaborating with a team when working on projects",
     lagos: "7 Pm",
+    location:"No 2, Beside Tower Bridge, Dorma House, Lekki, Lagos "
   },
   {
     id: 2,
-    eventThunbnil: "assets/images/event2.png",
+    eventThunbnil: "/assets/images/event2.png",
     eventType: "Festival",
     dateMonth: "DEC",
     dateDay: "06",
@@ -89,10 +127,11 @@ export const eventData = [
     longdesc:
       "Coachable and passionate about collaborating with a team when working on projects",
     lagos: "8 Pm",
+    location:"No 2, Beside Tower Bridge, Dorma House, Lekki, Lagos "
   },
   {
     id: 3,
-    eventThunbnil: "assets/images/event1.png",
+    eventThunbnil: "/assets/images/event1.png",
     eventType: "Festival",
     dateMonth: "Sep",
     dateDay: "14",
@@ -101,10 +140,11 @@ export const eventData = [
     longdesc:
       "Coachable and passionate about collaborating with a team when working on projects",
     lagos: "9 Pm",
+    location:"No 2, Beside Tower Bridge, Dorma House, Lekki, Lagos "
   },
   {
     id: 4,
-    eventThunbnil: "assets/images/event2.png",
+    eventThunbnil: "/assets/images/event2.png",
     eventType: "Featured",
     dateMonth: "Sep",
     dateDay: "20",
@@ -113,10 +153,11 @@ export const eventData = [
     longdesc:
       "Coachable and passionate about collaborating with a team when working on projects",
     lagos: "10 Pm",
+    location:"No 2, Beside Tower Bridge, Dorma House, Lekki, Lagos "
   },
   {
     id: 5,
-    eventThunbnil: "assets/images/event1.png",
+    eventThunbnil: "/assets/images/event1.png",
     eventType: "Party",
     dateMonth: "JUN",
     dateDay: "10",
@@ -125,10 +166,11 @@ export const eventData = [
     longdesc:
       "Coachable and passionate about collaborating with a team when working on projects",
     lagos: "10 Pm",
+    location:"No 2, Beside Tower Bridge, Dorma House, Lekki, Lagos "
   },
   {
     id: 6,
-    eventThunbnil: "assets/images/event2.png",
+    eventThunbnil: "/assets/images/event2.png",
     eventType: "Festival",
     dateMonth: "JUN",
     dateDay: "05",
@@ -140,7 +182,7 @@ export const eventData = [
   },
   {
     id: 7,
-    eventThunbnil: "assets/images/event1.png",
+    eventThunbnil: "/assets/images/event1.png",
     eventType: "Party",
     dateMonth: "JUN",
     dateDay: "06",
@@ -149,10 +191,11 @@ export const eventData = [
     longdesc:
       "Coachable and passionate about collaborating with a team when working on projects",
     lagos: "8 Pm",
+    location:"No 2, Beside Tower Bridge, Dorma House, Lekki, Lagos "
   },
   {
     id: 8,
-    eventThunbnil: "assets/images/event2.png",
+    eventThunbnil: "/assets/images/event2.png",
     eventType: "Festival",
     dateMonth: "Sep",
     dateDay: "12",
@@ -161,10 +204,11 @@ export const eventData = [
     longdesc:
       "Coachable and passionate about collaborating with a team when working on projects",
     lagos: "9 Pm",
+    location:"No 2, Beside Tower Bridge, Dorma House, Lekki, Lagos "
   },
   {
     id: 9,
-    eventThunbnil: "assets/images/event1.png",
+    eventThunbnil: "/assets/images/event1.png",
     eventType: "Party",
     dateMonth: "Sep",
     dateDay: "15",
@@ -173,10 +217,11 @@ export const eventData = [
     longdesc:
       "Coachable and passionate about collaborating with a team when working on projects",
     lagos: "10 Pm",
+    location:"No 2, Beside Tower Bridge, Dorma House, Lekki, Lagos "
   },
   {
     id: 10,
-    eventThunbnil: "assets/images/event2.png",
+    eventThunbnil: "/assets/images/event2.png",
     eventType: "Festival",
     dateMonth: "JUN",
     dateDay: "10",
@@ -185,10 +230,11 @@ export const eventData = [
     longdesc:
       "Coachable and passionate about collaborating with a team when working on projects",
     lagos: "10 Pm",
+    location:"No 2, Beside Tower Bridge, Dorma House, Lekki, Lagos "
   },
   {
     id: 11,
-    eventThunbnil: "assets/images/event1.png",
+    eventThunbnil: "/assets/images/event1.png",
     eventType: "Featured",
     dateMonth: "JUN",
     dateDay: "05",
@@ -197,10 +243,11 @@ export const eventData = [
     longdesc:
       "Coachable and passionate about collaborating with a team when working on projects",
     lagos: "7 Pm",
+    location:"No 2, Beside Tower Bridge, Dorma House, Lekki, Lagos "
   },
   {
     id: 12,
-    eventThunbnil: "assets/images/event2.png",
+    eventThunbnil: "/assets/images/event2.png",
     eventType: "Festival",
     dateMonth: "JUN",
     dateDay: "06",
@@ -209,10 +256,11 @@ export const eventData = [
     longdesc:
       "Coachable and passionate about collaborating with a team when working on projects",
     lagos: "8 Pm",
+    location:"No 2, Beside Tower Bridge, Dorma House, Lekki, Lagos "
   },
   {
     id: 13,
-    eventThunbnil: "assets/images/event1.png",
+    eventThunbnil: "/assets/images/event1.png",
     eventType: "Featured",
     dateMonth: "JUN",
     dateDay: "07",
@@ -221,10 +269,11 @@ export const eventData = [
     longdesc:
       "Coachable and passionate about collaborating with a team when working on projects",
     lagos: "9 Pm",
+    location:"No 2, Beside Tower Bridge, Dorma House, Lekki, Lagos "
   },
   {
     id: 14,
-    eventThunbnil: "assets/images/event2.png",
+    eventThunbnil: "/assets/images/event2.png",
     eventType: "Festival",
     dateMonth: "JUN",
     dateDay: "10",
@@ -233,10 +282,11 @@ export const eventData = [
     longdesc:
       "Coachable and passionate about collaborating with a team when working on projects",
     lagos: "10 Pm",
+    location:"No 2, Beside Tower Bridge, Dorma House, Lekki, Lagos "
   },
   {
     id: 15,
-    eventThunbnil: "assets/images/event1.png",
+    eventThunbnil: "/assets/images/event1.png",
     eventType: "Festival",
     dateMonth: "JUN",
     dateDay: "10",
@@ -245,10 +295,11 @@ export const eventData = [
     longdesc:
       "Coachable and passionate about collaborating with a team when working on projects",
     lagos: "10 Pm",
+    location:"No 2, Beside Tower Bridge, Dorma House, Lekki, Lagos "
   },
   {
     id: 16,
-    eventThunbnil: "assets/images/event2.png",
+    eventThunbnil: "/assets/images/event2.png",
     eventType: "Featured",
     dateMonth: "JUN",
     dateDay: "05",
@@ -257,10 +308,11 @@ export const eventData = [
     longdesc:
       "Coachable and passionate about collaborating with a team when working on projects",
     lagos: "7 Pm",
+    location:"No 2, Beside Tower Bridge, Dorma House, Lekki, Lagos "
   },
   {
     id: 17,
-    eventThunbnil: "assets/images/event1.png",
+    eventThunbnil: "/assets/images/event1.png",
     eventType: "Festival",
     dateMonth: "JUN",
     dateDay: "06",
@@ -269,10 +321,11 @@ export const eventData = [
     longdesc:
       "Coachable and passionate about collaborating with a team when working on projects",
     lagos: "8 Pm",
+    location:"No 2, Beside Tower Bridge, Dorma House, Lekki, Lagos "
   },
   {
     id: 18,
-    eventThunbnil: "assets/images/event2.png",
+    eventThunbnil: "/assets/images/event2.png",
     eventType: "Festival",
     dateMonth: "JUN",
     dateDay: "07",
@@ -281,10 +334,11 @@ export const eventData = [
     longdesc:
       "Coachable and passionate about collaborating with a team when working on projects",
     lagos: "9 Pm",
+    location:"No 2, Beside Tower Bridge, Dorma House, Lekki, Lagos "
   },
   {
     id: 20,
-    eventThunbnil: "assets/images/event1.png",
+    eventThunbnil: "/assets/images/event1.png",
     eventType: "Festival",
     dateMonth: "JUN",
     dateDay: "10",
@@ -293,10 +347,11 @@ export const eventData = [
     longdesc:
       "Coachable and passionate about collaborating with a team when working on projects",
     lagos: "10 Pm",
+    location:"No 2, Beside Tower Bridge, Dorma House, Lekki, Lagos "
   },
   {
     id: 21,
-    eventThunbnil: "assets/images/event2.png",
+    eventThunbnil: "/assets/images/event2.png",
     eventType: "Festival",
     dateMonth: "JUN",
     dateDay: "10",
@@ -305,10 +360,11 @@ export const eventData = [
     longdesc:
       "Coachable and passionate about collaborating with a team when working on projects",
     lagos: "10 Pm",
+    location:"No 2, Beside Tower Bridge, Dorma House, Lekki, Lagos "
   },
   {
     id: 22,
-    eventThunbnil: "assets/images/event1.png",
+    eventThunbnil: "/assets/images/event1.png",
     eventType: "Festival",
     dateMonth: "JUN",
     dateDay: "10",
@@ -317,10 +373,11 @@ export const eventData = [
     longdesc:
       "Coachable and passionate about collaborating with a team when working on projects",
     lagos: "10 Pm",
+    location:"No 2, Beside Tower Bridge, Dorma House, Lekki, Lagos "
   },
   {
     id: 23,
-    eventThunbnil: "assets/images/event2.png",
+    eventThunbnil: "/assets/images/event2.png",
     eventType: "Festival",
     dateMonth: "JUN",
     dateDay: "10",
@@ -329,10 +386,11 @@ export const eventData = [
     longdesc:
       "Coachable and passionate about collaborating with a team when working on projects",
     lagos: "10 Pm",
+    location:"No 2, Beside Tower Bridge, Dorma House, Lekki, Lagos "
   },
   {
     id: 24,
-    eventThunbnil: "assets/images/event1.png",
+    eventThunbnil: "/assets/images/event1.png",
     eventType: "Festival",
     dateMonth: "JUN",
     dateDay: "10",
@@ -341,10 +399,11 @@ export const eventData = [
     longdesc:
       "Coachable and passionate about collaborating with a team when working on projects",
     lagos: "10 Pm",
+    location:"No 2, Beside Tower Bridge, Dorma House, Lekki, Lagos "
   },
   {
     id: 25,
-    eventThunbnil: "assets/images/event1.png",
+    eventThunbnil: "/assets/images/event1.png",
     eventType: "Festival",
     dateMonth: "JUN",
     dateDay: "10",
@@ -353,10 +412,11 @@ export const eventData = [
     longdesc:
       "Coachable and passionate about collaborating with a team when working on projects",
     lagos: "10 Pm",
+    location:"No 2, Beside Tower Bridge, Dorma House, Lekki, Lagos "
   },
   {
     id: 26,
-    eventThunbnil: "assets/images/event2.png",
+    eventThunbnil: "/assets/images/event2.png",
     eventType: "Festival",
     dateMonth: "JUN",
     dateDay: "10",
@@ -365,10 +425,11 @@ export const eventData = [
     longdesc:
       "Coachable and passionate about collaborating with a team when working on projects",
     lagos: "10 Pm",
+    location:"No 2, Beside Tower Bridge, Dorma House, Lekki, Lagos "
   },
   {
     id: 27,
-    eventThunbnil: "assets/images/event1.png",
+    eventThunbnil: "/assets/images/event1.png",
     eventType: "Festival",
     dateMonth: "JUN",
     dateDay: "10",
@@ -377,10 +438,11 @@ export const eventData = [
     longdesc:
       "Coachable and passionate about collaborating with a team when working on projects",
     lagos: "10 Pm",
+    location:"No 2, Beside Tower Bridge, Dorma House, Lekki, Lagos "
   },
   {
     id: 28,
-    eventThunbnil: "assets/images/event2.png",
+    eventThunbnil: "/assets/images/event2.png",
     eventType: "Festival",
     dateMonth: "JUN",
     dateDay: "10",
@@ -389,10 +451,11 @@ export const eventData = [
     longdesc:
       "Coachable and passionate about collaborating with a team when working on projects",
     lagos: "10 Pm",
+    location:"No 2, Beside Tower Bridge, Dorma House, Lekki, Lagos "
   },
   {
     id: 29,
-    eventThunbnil: "assets/images/event1.png",
+    eventThunbnil: "/assets/images/event1.png",
     eventType: "Festival",
     dateMonth: "JUN",
     dateDay: "06",
@@ -401,10 +464,11 @@ export const eventData = [
     longdesc:
       "Coachable and passionate about collaborating with a team when working on projects",
     lagos: "8 Pm",
+    location:"No 2, Beside Tower Bridge, Dorma House, Lekki, Lagos "
   },
   {
     id: 30,
-    eventThunbnil: "assets/images/event2.png",
+    eventThunbnil: "/assets/images/event2.png",
     eventType: "Festival",
     dateMonth: "JUN",
     dateDay: "07",
@@ -413,10 +477,11 @@ export const eventData = [
     longdesc:
       "Coachable and passionate about collaborating with a team when working on projects",
     lagos: "9 Pm",
+    location:"No 2, Beside Tower Bridge, Dorma House, Lekki, Lagos "
   },
   {
     id: 31,
-    eventThunbnil: "assets/images/event1.png",
+    eventThunbnil: "/assets/images/event1.png",
     eventType: "Festival",
     dateMonth: "JUN",
     dateDay: "10",
@@ -425,10 +490,11 @@ export const eventData = [
     longdesc:
       "Coachable and passionate about collaborating with a team when working on projects",
     lagos: "10 Pm",
+    location:"No 2, Beside Tower Bridge, Dorma House, Lekki, Lagos "
   },
   {
     id: 32,
-    eventThunbnil: "assets/images/event2.png",
+    eventThunbnil: "/assets/images/event2.png",
     eventType: "Festival",
     dateMonth: "JUN",
     dateDay: "10",
@@ -437,10 +503,11 @@ export const eventData = [
     longdesc:
       "Coachable and passionate about collaborating with a team when working on projects",
     lagos: "10 Pm",
+    location:"No 2, Beside Tower Bridge, Dorma House, Lekki, Lagos "
   },
   {
     id: 33,
-    eventThunbnil: "assets/images/event1.png",
+    eventThunbnil: "/assets/images/event1.png",
     eventType: "Festival",
     dateMonth: "JUN",
     dateDay: "10",
@@ -449,10 +516,11 @@ export const eventData = [
     longdesc:
       "Coachable and passionate about collaborating with a team when working on projects",
     lagos: "10 Pm",
+    location:"No 2, Beside Tower Bridge, Dorma House, Lekki, Lagos "
   },
   {
     id: 34,
-    eventThunbnil: "assets/images/event2.png",
+    eventThunbnil: "/assets/images/event2.png",
     eventType: "Festival",
     dateMonth: "JUN",
     dateDay: "10",
@@ -461,10 +529,11 @@ export const eventData = [
     longdesc:
       "Coachable and passionate about collaborating with a team when working on projects",
     lagos: "10 Pm",
+    location:"No 2, Beside Tower Bridge, Dorma House, Lekki, Lagos "
   },
   {
     id: 35,
-    eventThunbnil: "assets/images/event1.png",
+    eventThunbnil: "/assets/images/event1.png",
     eventType: "Festival",
     dateMonth: "JUN",
     dateDay: "10",
@@ -473,10 +542,11 @@ export const eventData = [
     longdesc:
       "Coachable and passionate about collaborating with a team when working on projects",
     lagos: "10 Pm",
+    location:"No 2, Beside Tower Bridge, Dorma House, Lekki, Lagos "
   },
   {
     id: 36,
-    eventThunbnil: "assets/images/event1.png",
+    eventThunbnil: "/assets/images/event1.png",
     eventType: "Festival",
     dateMonth: "JUN",
     dateDay: "10",
@@ -485,10 +555,11 @@ export const eventData = [
     longdesc:
       "Coachable and passionate about collaborating with a team when working on projects",
     lagos: "10 Pm",
+    location:"No 2, Beside Tower Bridge, Dorma House, Lekki, Lagos "
   },
   {
     id: 37,
-    eventThunbnil: "assets/images/event2.png",
+    eventThunbnil: "/assets/images/event2.png",
     eventType: "Festival",
     dateMonth: "JUN",
     dateDay: "10",
@@ -497,10 +568,11 @@ export const eventData = [
     longdesc:
       "Coachable and passionate about collaborating with a team when working on projects",
     lagos: "10 Pm",
+    location:"No 2, Beside Tower Bridge, Dorma House, Lekki, Lagos "
   },
   {
     id: 38,
-    eventThunbnil: "assets/images/event1.png",
+    eventThunbnil: "/assets/images/event1.png",
     eventType: "Festival",
     dateMonth: "JUN",
     dateDay: "10",
@@ -509,10 +581,11 @@ export const eventData = [
     longdesc:
       "Coachable and passionate about collaborating with a team when working on projects",
     lagos: "10 Pm",
+    location:"No 2, Beside Tower Bridge, Dorma House, Lekki, Lagos "
   },
   {
     id: 39,
-    eventThunbnil: "assets/images/event2.png",
+    eventThunbnil: "/assets/images/event2.png",
     eventType: "Festival",
     dateMonth: "JUN",
     dateDay: "10",
@@ -521,11 +594,12 @@ export const eventData = [
     longdesc:
       "Coachable and passionate about collaborating with a team when working on projects",
     lagos: "10 Pm",
+    location:"No 2, Beside Tower Bridge, Dorma House, Lekki, Lagos "
   },
   
   {
     id: 40,
-    eventThunbnil: "assets/images/event1.png",
+    eventThunbnil: "/assets/images/event1.png",
     eventType: "Party",
     dateMonth: "DEC",
     dateDay: "08",
@@ -534,10 +608,11 @@ export const eventData = [
     longdesc:
       "Coachable and passionate about collaborating with a team when working on projects",
     lagos: "7 Pm",
+    location:"No 2, Beside Tower Bridge, Dorma House, Lekki, Lagos "
   },
   {
     id: 41,
-    eventThunbnil: "assets/images/event2.png",
+    eventThunbnil: "/assets/images/event2.png",
     eventType: "Festival",
     dateMonth: "DEC",
     dateDay: "06",
@@ -546,10 +621,11 @@ export const eventData = [
     longdesc:
       "Coachable and passionate about collaborating with a team when working on projects",
     lagos: "8 Pm",
+    location:"No 2, Beside Tower Bridge, Dorma House, Lekki, Lagos "
   },
   {
     id: 42,
-    eventThunbnil: "assets/images/event1.png",
+    eventThunbnil: "/assets/images/event1.png",
     eventType: "Festival",
     dateMonth: "Sep",
     dateDay: "14",
@@ -558,10 +634,11 @@ export const eventData = [
     longdesc:
       "Coachable and passionate about collaborating with a team when working on projects",
     lagos: "9 Pm",
+    location:"No 2, Beside Tower Bridge, Dorma House, Lekki, Lagos "
   },
   {
     id: 43,
-    eventThunbnil: "assets/images/event2.png",
+    eventThunbnil: "/assets/images/event2.png",
     eventType: "Featured",
     dateMonth: "Sep",
     dateDay: "20",
@@ -570,10 +647,11 @@ export const eventData = [
     longdesc:
       "Coachable and passionate about collaborating with a team when working on projects",
     lagos: "10 Pm",
+    location:"No 2, Beside Tower Bridge, Dorma House, Lekki, Lagos "
   },
   {
     id: 44,
-    eventThunbnil: "assets/images/event1.png",
+    eventThunbnil: "/assets/images/event1.png",
     eventType: "Party",
     dateMonth: "JUN",
     dateDay: "10",
@@ -582,10 +660,11 @@ export const eventData = [
     longdesc:
       "Coachable and passionate about collaborating with a team when working on projects",
     lagos: "10 Pm",
+    location:"No 2, Beside Tower Bridge, Dorma House, Lekki, Lagos "
   },
   {
     id: 6,
-    eventThunbnil: "assets/images/event2.png",
+    eventThunbnil: "/assets/images/event2.png",
     eventType: "Festival",
     dateMonth: "JUN",
     dateDay: "05",
@@ -594,10 +673,11 @@ export const eventData = [
     longdesc:
       "Coachable and passionate about collaborating with a team when working on projects",
     lagos: "7 Pm",
+    location:"No 2, Beside Tower Bridge, Dorma House, Lekki, Lagos "
   },
   {
     id: 45,
-    eventThunbnil: "assets/images/event1.png",
+    eventThunbnil: "/assets/images/event1.png",
     eventType: "Party",
     dateMonth: "JUN",
     dateDay: "06",
@@ -606,10 +686,11 @@ export const eventData = [
     longdesc:
       "Coachable and passionate about collaborating with a team when working on projects",
     lagos: "8 Pm",
+    location:"No 2, Beside Tower Bridge, Dorma House, Lekki, Lagos "
   },
   {
     id: 46,
-    eventThunbnil: "assets/images/event2.png",
+    eventThunbnil: "/assets/images/event2.png",
     eventType: "Festival",
     dateMonth: "Sep",
     dateDay: "12",
@@ -618,10 +699,11 @@ export const eventData = [
     longdesc:
       "Coachable and passionate about collaborating with a team when working on projects",
     lagos: "9 Pm",
+    location:"No 2, Beside Tower Bridge, Dorma House, Lekki, Lagos "
   },
   {
     id: 47,
-    eventThunbnil: "assets/images/event1.png",
+    eventThunbnil: "/assets/images/event1.png",
     eventType: "Party",
     dateMonth: "Sep",
     dateDay: "15",
@@ -630,10 +712,11 @@ export const eventData = [
     longdesc:
       "Coachable and passionate about collaborating with a team when working on projects",
     lagos: "10 Pm",
+    location:"No 2, Beside Tower Bridge, Dorma House, Lekki, Lagos "
   },
   {
     id: 48,
-    eventThunbnil: "assets/images/event2.png",
+    eventThunbnil: "/assets/images/event2.png",
     eventType: "Festival",
     dateMonth: "JUN",
     dateDay: "10",
@@ -642,10 +725,11 @@ export const eventData = [
     longdesc:
       "Coachable and passionate about collaborating with a team when working on projects",
     lagos: "10 Pm",
+    location:"No 2, Beside Tower Bridge, Dorma House, Lekki, Lagos "
   },
   {
     id: 49,
-    eventThunbnil: "assets/images/event1.png",
+    eventThunbnil: "/assets/images/event1.png",
     eventType: "Featured",
     dateMonth: "JUN",
     dateDay: "05",
@@ -654,10 +738,11 @@ export const eventData = [
     longdesc:
       "Coachable and passionate about collaborating with a team when working on projects",
     lagos: "7 Pm",
+    location:"No 2, Beside Tower Bridge, Dorma House, Lekki, Lagos "
   },
   {
     id: 50,
-    eventThunbnil: "assets/images/event2.png",
+    eventThunbnil: "/assets/images/event2.png",
     eventType: "Festival",
     dateMonth: "JUN",
     dateDay: "06",
@@ -666,10 +751,11 @@ export const eventData = [
     longdesc:
       "Coachable and passionate about collaborating with a team when working on projects",
     lagos: "8 Pm",
+    location:"No 2, Beside Tower Bridge, Dorma House, Lekki, Lagos "
   },
   {
     id: 51,
-    eventThunbnil: "assets/images/event1.png",
+    eventThunbnil: "/assets/images/event1.png",
     eventType: "Featured",
     dateMonth: "JUN",
     dateDay: "07",
@@ -678,10 +764,11 @@ export const eventData = [
     longdesc:
       "Coachable and passionate about collaborating with a team when working on projects",
     lagos: "9 Pm",
+    location:"No 2, Beside Tower Bridge, Dorma House, Lekki, Lagos "
   },
   {
     id: 52,
-    eventThunbnil: "assets/images/event2.png",
+    eventThunbnil: "/assets/images/event2.png",
     eventType: "Festival",
     dateMonth: "JUN",
     dateDay: "10",
@@ -690,10 +777,11 @@ export const eventData = [
     longdesc:
       "Coachable and passionate about collaborating with a team when working on projects",
     lagos: "10 Pm",
+    location:"No 2, Beside Tower Bridge, Dorma House, Lekki, Lagos "
   },
   {
     id: 53,
-    eventThunbnil: "assets/images/event1.png",
+    eventThunbnil: "/assets/images/event1.png",
     eventType: "Festival",
     dateMonth: "JUN",
     dateDay: "10",
@@ -702,10 +790,11 @@ export const eventData = [
     longdesc:
       "Coachable and passionate about collaborating with a team when working on projects",
     lagos: "10 Pm",
+    location:"No 2, Beside Tower Bridge, Dorma House, Lekki, Lagos "
   },
   {
     id: 54,
-    eventThunbnil: "assets/images/event2.png",
+    eventThunbnil: "/assets/images/event2.png",
     eventType: "Featured",
     dateMonth: "JUN",
     dateDay: "05",
@@ -714,10 +803,11 @@ export const eventData = [
     longdesc:
       "Coachable and passionate about collaborating with a team when working on projects",
     lagos: "7 Pm",
+    location:"No 2, Beside Tower Bridge, Dorma House, Lekki, Lagos "
   },
   {
     id: 55,
-    eventThunbnil: "assets/images/event1.png",
+    eventThunbnil: "/assets/images/event1.png",
     eventType: "Festival",
     dateMonth: "JUN",
     dateDay: "06",
@@ -726,10 +816,11 @@ export const eventData = [
     longdesc:
       "Coachable and passionate about collaborating with a team when working on projects",
     lagos: "8 Pm",
+    location:"No 2, Beside Tower Bridge, Dorma House, Lekki, Lagos "
   },
   {
     id: 56,
-    eventThunbnil: "assets/images/event2.png",
+    eventThunbnil: "/assets/images/event2.png",
     eventType: "Festival",
     dateMonth: "JUN",
     dateDay: "07",
@@ -738,10 +829,11 @@ export const eventData = [
     longdesc:
       "Coachable and passionate about collaborating with a team when working on projects",
     lagos: "9 Pm",
+    location:"No 2, Beside Tower Bridge, Dorma House, Lekki, Lagos "
   },
   {
     id: 57,
-    eventThunbnil: "assets/images/event1.png",
+    eventThunbnil: "/assets/images/event1.png",
     eventType: "Festival",
     dateMonth: "JUN",
     dateDay: "10",
@@ -750,10 +842,11 @@ export const eventData = [
     longdesc:
       "Coachable and passionate about collaborating with a team when working on projects",
     lagos: "10 Pm",
+    location:"No 2, Beside Tower Bridge, Dorma House, Lekki, Lagos "
   },
   {
     id: 58,
-    eventThunbnil: "assets/images/event2.png",
+    eventThunbnil: "/assets/images/event2.png",
     eventType: "Festival",
     dateMonth: "JUN",
     dateDay: "10",
@@ -762,10 +855,11 @@ export const eventData = [
     longdesc:
       "Coachable and passionate about collaborating with a team when working on projects",
     lagos: "10 Pm",
+    location:"No 2, Beside Tower Bridge, Dorma House, Lekki, Lagos "
   },
   {
     id: 59,
-    eventThunbnil: "assets/images/event1.png",
+    eventThunbnil: "/assets/images/event1.png",
     eventType: "Festival",
     dateMonth: "JUN",
     dateDay: "10",
@@ -774,10 +868,11 @@ export const eventData = [
     longdesc:
       "Coachable and passionate about collaborating with a team when working on projects",
     lagos: "10 Pm",
+    location:"No 2, Beside Tower Bridge, Dorma House, Lekki, Lagos "
   },
   {
     id: 60,
-    eventThunbnil: "assets/images/event2.png",
+    eventThunbnil: "/assets/images/event2.png",
     eventType: "Festival",
     dateMonth: "JUN",
     dateDay: "10",
@@ -786,10 +881,11 @@ export const eventData = [
     longdesc:
       "Coachable and passionate about collaborating with a team when working on projects",
     lagos: "10 Pm",
+    location:"No 2, Beside Tower Bridge, Dorma House, Lekki, Lagos "
   },
   {
     id: 61,
-    eventThunbnil: "assets/images/event1.png",
+    eventThunbnil: "/assets/images/event1.png",
     eventType: "Festival",
     dateMonth: "JUN",
     dateDay: "10",
@@ -798,10 +894,11 @@ export const eventData = [
     longdesc:
       "Coachable and passionate about collaborating with a team when working on projects",
     lagos: "10 Pm",
+    location:"No 2, Beside Tower Bridge, Dorma House, Lekki, Lagos "
   },
   {
     id: 62,
-    eventThunbnil: "assets/images/event1.png",
+    eventThunbnil: "/assets/images/event1.png",
     eventType: "Festival",
     dateMonth: "JUN",
     dateDay: "10",
@@ -810,10 +907,11 @@ export const eventData = [
     longdesc:
       "Coachable and passionate about collaborating with a team when working on projects",
     lagos: "10 Pm",
+    location:"No 2, Beside Tower Bridge, Dorma House, Lekki, Lagos "
   },
   {
     id: 63,
-    eventThunbnil: "assets/images/event2.png",
+    eventThunbnil: "/assets/images/event2.png",
     eventType: "Festival",
     dateMonth: "JUN",
     dateDay: "10",
@@ -822,10 +920,11 @@ export const eventData = [
     longdesc:
       "Coachable and passionate about collaborating with a team when working on projects",
     lagos: "10 Pm",
+    location:"No 2, Beside Tower Bridge, Dorma House, Lekki, Lagos "
   },
   {
     id: 64,
-    eventThunbnil: "assets/images/event1.png",
+    eventThunbnil: "/assets/images/event1.png",
     eventType: "Festival",
     dateMonth: "JUN",
     dateDay: "10",
@@ -834,10 +933,11 @@ export const eventData = [
     longdesc:
       "Coachable and passionate about collaborating with a team when working on projects",
     lagos: "10 Pm",
+    location:"No 2, Beside Tower Bridge, Dorma House, Lekki, Lagos "
   },
   {
     id: 65,
-    eventThunbnil: "assets/images/event2.png",
+    eventThunbnil: "/assets/images/event2.png",
     eventType: "Festival",
     dateMonth: "JUN",
     dateDay: "10",
@@ -846,10 +946,11 @@ export const eventData = [
     longdesc:
       "Coachable and passionate about collaborating with a team when working on projects",
     lagos: "10 Pm",
+    location:"No 2, Beside Tower Bridge, Dorma House, Lekki, Lagos "
   },
   {
     id: 66,
-    eventThunbnil: "assets/images/event1.png",
+    eventThunbnil: "/assets/images/event1.png",
     eventType: "Festival",
     dateMonth: "JUN",
     dateDay: "06",
@@ -858,10 +959,11 @@ export const eventData = [
     longdesc:
       "Coachable and passionate about collaborating with a team when working on projects",
     lagos: "8 Pm",
+    location:"No 2, Beside Tower Bridge, Dorma House, Lekki, Lagos "
   },
   {
     id: 67,
-    eventThunbnil: "assets/images/event2.png",
+    eventThunbnil: "/assets/images/event2.png",
     eventType: "Festival",
     dateMonth: "JUN",
     dateDay: "07",
@@ -870,10 +972,11 @@ export const eventData = [
     longdesc:
       "Coachable and passionate about collaborating with a team when working on projects",
     lagos: "9 Pm",
+    location:"No 2, Beside Tower Bridge, Dorma House, Lekki, Lagos "
   },
   {
     id: 68,
-    eventThunbnil: "assets/images/event1.png",
+    eventThunbnil: "/assets/images/event1.png",
     eventType: "Festival",
     dateMonth: "JUN",
     dateDay: "10",
@@ -882,10 +985,11 @@ export const eventData = [
     longdesc:
       "Coachable and passionate about collaborating with a team when working on projects",
     lagos: "10 Pm",
+    location:"No 2, Beside Tower Bridge, Dorma House, Lekki, Lagos "
   },
   {
     id: 69,
-    eventThunbnil: "assets/images/event2.png",
+    eventThunbnil: "/assets/images/event2.png",
     eventType: "Festival",
     dateMonth: "JUN",
     dateDay: "10",
@@ -894,10 +998,11 @@ export const eventData = [
     longdesc:
       "Coachable and passionate about collaborating with a team when working on projects",
     lagos: "10 Pm",
+    location:"No 2, Beside Tower Bridge, Dorma House, Lekki, Lagos "
   },
   {
     id: 70,
-    eventThunbnil: "assets/images/event1.png",
+    eventThunbnil: "/assets/images/event1.png",
     eventType: "Festival",
     dateMonth: "JUN",
     dateDay: "10",
@@ -906,6 +1011,7 @@ export const eventData = [
     longdesc:
       "Coachable and passionate about collaborating with a team when working on projects",
     lagos: "10 Pm",
+    location:"No 2, Beside Tower Bridge, Dorma House, Lekki, Lagos "
   },  
 
 ];
