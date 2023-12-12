@@ -1,5 +1,6 @@
 const ID = "id";
 const USERID = "userId";
+const EVENTID = "eventId";
 const FIRST_NAME = "firstName";
 const LAST_NAME = "lastName";
 const EMAIL = "email";
@@ -10,14 +11,19 @@ const RECIPIENT_FIRST_NAME = "firstName";
 const RECIPIENT_LAST_NAME = "lastName";
 const RECIPIENT_EMAIL = "email";
 const RECIPIENT_PHONE = "phone";
+const NEWS_UPDATE = "newsUpdate";
+const EVENT_UPDATE = "eventUpdate";
 
 export const initialBookingState = {
   [ID]: "",
   [USERID]:"1234",
+  [EVENTID]:"",
   [FIRST_NAME]: "",
   [LAST_NAME]: "",
   [EMAIL]: "",
   [CONFIRM_EMAIL]: "",
+  [NEWS_UPDATE]: false,
+  [EVENT_UPDATE]: false,
   [RECIPIENT]: [] as {
     id: string;
     firstName: string;
