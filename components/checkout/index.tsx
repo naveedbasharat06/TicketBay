@@ -6,7 +6,7 @@ import { useMedia } from "react-use";
 import bookingsStore from "@/store/bookings.store";
 import { v4 as uuidv4 } from "uuid";
 import { toast } from "react-hot-toast";
-import { useRouter as useNavigation } from "next/navigation";
+import { Payment } from "@/components/payment";
 
 interface props {
   id?: any;
@@ -20,8 +20,6 @@ const TicketSummury: FC<props> = ({ id }) => {
   const [recipient, setRecipient] = useState(recipientState);
   const [eventUpdate, setEventUpdate] = useState(false);
   const [newsUpdate, setNewsUpdate] = useState(false);
-  const navigation = useNavigation();
-
   console.log("bookings", JSON.parse(JSON.stringify(bookingsStore.bookings)));
   const inputFieldChange = (e: any) => {
     const { name, value } = e.target;
@@ -59,7 +57,11 @@ const TicketSummury: FC<props> = ({ id }) => {
         eventUpdate: eventUpdate,
       });
       toast.success("Booking created.");
-      navigation.push(`booking?id=${uuid}`);
+      // navigation.push(`booking?id=${uuid}`);
+      Payment({
+        lineItems: [{ price: "price_1OMvGvDouCITlfo8BaYKy42i", quantity: 1 }],
+        id: uuid,
+      });
     } else {
       toast.error("Please fill all fields.");
     }

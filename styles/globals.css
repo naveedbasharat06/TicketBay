@@ -111,3 +111,9 @@ body::-webkit-scrollbar{
     box-shadow: inset 1em 1em #fff !important;
   }
 
+  input[type='radio'] {
+    accent-color: #FD2F09;
+}
+
+
+

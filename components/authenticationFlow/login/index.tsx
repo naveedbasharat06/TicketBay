@@ -1,6 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
 import CutomButton from "@/components/defaultComponents/customButtons/cutomButton";
+import UsersStore from "@/store/users.store";
+import { useRouter as useNavigation } from "next/navigation";
+import { toast } from "react-hot-toast";
 function Login() {
+  const navigation = useNavigation();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const userLogin = () => {
+    const user = UsersStore.getUserByEmail(email);
+    if (user && user.password === password) {
+      const id = user.id;
+      UsersStore.setCurrentUserId(id);
+      navigation.push("/dashboard")
+
+    } else {
+      // Invalid credentials
+      console.log("Invalid credentials");
+    }
+  };
+
+
   return (
     <div className=" lg:grid grid-cols-5 lg:h-[533px] bg-[#E3F5FF] mt-10 my-10 rounded-[4px] border lg:bg-[url('/assets/images/authbg.png')] bg-bottom bg-left bg-no-repeat ">
       <div className="col-span-3 p-10 ">
@@ -14,7 +34,12 @@ function Login() {
         <div className="lg:text-center">
           <p className="text-[24px] font-[500] text-[#979797] lg:mr-6">
             Dont have an account? Register{" "}
-            <span className="text-[#FD2F09] cursor-pointer underline">
+            <span
+              className="text-[#FD2F09] cursor-pointer underline"
+              onClick={() => {
+                navigation.push("/signup");
+              }}
+            >
               here
             </span>
           </p>
@@ -29,6 +54,8 @@ function Login() {
                   type="email"
                   placeholder="Email address"
                   className="h-full w-full outline-none"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                 />
               </div>
             </div>
@@ -42,6 +69,8 @@ function Login() {
                 type="password"
                 placeholder="Password"
                 className="h-full w-full outline-none"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
               />
             </div>
             <div className="mt-5 flex gap-2 items-center">
@@ -54,7 +83,7 @@ function Login() {
             <div>
               <input type="button" name="Login"></input>
             </div>
-            <div className="mt-5">
+            <div className="mt-5" onClick={userLogin}>
               <CutomButton width="full" label={"Login"}></CutomButton>
             </div>
 
