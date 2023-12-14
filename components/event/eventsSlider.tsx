@@ -26,7 +26,13 @@ function EventsSlider() {
   };
   return (
     <div className=" bg-[#E3F5FF] p-10 lg:flex gap-5 justify-between border rounded-[4px] lg:h-[500px]">
-      <div className="lg:w-[35%]">
+      <motion.div
+        className="lg:w-[35%]"
+        initial={{ opacity: 0, scale: 0.8, filter: "blur(8px)" }}
+        animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
+        transition={{ duration: 0.5, ease: "easeInOut" }}
+        key={specificArray.id}
+      >
         <div>
           <span className="font-family text-[48px] font-[400] text-[#FFB922]">
             {specificArray.eventType}
@@ -55,7 +61,7 @@ function EventsSlider() {
             Starting from {specificArray.startingFrom}
           </span>
         </div>
-      </div>
+      </motion.div>
       <div className="lg:flex justify-between lg:w-[65%] gap-5">
         <div>
           <motion.img
