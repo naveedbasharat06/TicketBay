@@ -5,6 +5,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { useMedia } from "react-use";
 import { eventData } from "../../constants";
+import { motion } from "framer-motion";
 
 function EventsSlider() {
   const isSmallScreen = useMedia("(max-width: 600px)");
@@ -57,11 +58,15 @@ function EventsSlider() {
       </div>
       <div className="lg:flex justify-between lg:w-[65%] gap-5">
         <div>
-          <img
+          <motion.img
             src={specificArray.eventThunbnil}
             alt="img"
             className="h-[100%] w-[100%] rounded-[4px]"
-          />
+            initial={{ opacity: 0, scale: 0.8, filter: "blur(8px)" }}
+            animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
+            transition={{ duration: 0.5, ease: "easeInOut" }}
+            key={specificArray.id}
+          ></motion.img>
         </div>
         <div className="lg:w-[25%] pt-[30px]">
           <div className="h-[100%] ">

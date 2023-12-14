@@ -67,6 +67,30 @@ export const CUSTOMMENU = [
     menu: "Login",
   },
 ];
+
+export const DashboardMenu = [
+  {
+    id: 1,
+    menu: "Dashboard",
+  },
+  {
+    id: 2,
+    menu: "Events",
+  },
+  {
+    id: 3,
+    menu: "Organiser",
+  },
+  {
+    id: 4,
+    menu: "My Bookings",
+  },
+  {
+    id: 5,
+    menu: "Organisers",
+  },
+  
+];
 export const eventsDropDown = [
   {
     id: 1,
@@ -84,6 +108,20 @@ export const eventsDropDown = [
     id: 4,
     menu: "Party",
   },
+];
+
+export const HeaderDropDown = [
+  {
+    id: 1,
+    iconPath:"/assets/images/profile.svg",
+    menu: "Profile",
+  },
+  {
+    id: 2,
+    iconPath:"/assets/images/logout.svg",
+    menu: "Logout",
+  },
+ 
 ];
 
 export type EventType = {
