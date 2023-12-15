@@ -40,6 +40,13 @@ export const recipientState = {
   [RECIPIENT_EMAIL]: "",
   [RECIPIENT_PHONE]: "",
 };
+export const intialUserDetails = {
+  id: "",
+  name: "",
+  email: "",
+  password: "",
+};
+
 
 export const CUSTOMMENU = [
   {
