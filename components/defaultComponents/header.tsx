@@ -6,6 +6,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { HeaderDropDown } from "../../constants";
 import UsersStore from "@/store/users.store";
+import { useRouter as useNavigation } from "next/navigation";
 
 function Header() {
   const router = useRouter();
@@ -13,7 +14,15 @@ function Header() {
   const [isDashboard, setIsDashboard] = useState(true);
   const [isOpenMenu, setIsOpenMenu] = useState<boolean>(false);
   const [isDropdownVisible, setIsDropdownVisible] = useState(false);
-
+  const navigation = useNavigation();
+  const user = UsersStore.users?.find(
+    (item) => item.id === UsersStore.currentUserId
+  );
+  function getFirstLetterOfFirstName(name:any) {
+    const words = name.split(' ');
+    const firstLetter = words[0].charAt(0);
+    return firstLetter;
+  }
   useEffect(() => {
     if (pathname.includes("dashboard")) {
       setIsDashboard(true);
@@ -25,6 +34,7 @@ function Header() {
     if (menu === 1) {
     } else {
       UsersStore.setCurrentUserId(null);
+      navigation.push("/")
     }
   };
 
@@ -78,7 +88,7 @@ function Header() {
                 : setIsDropdownVisible(true);
             }}
           >
-            <span className="text-[18px] font-[500] text-[#133142]">A</span>
+            <span className="text-[18px] font-[500] text-[#133142]">{getFirstLetterOfFirstName(user.name)}</span>
           </div>
         )}
 
