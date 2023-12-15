@@ -5,18 +5,69 @@ import Footer from "@/components/defaultComponents/footer";
 import { Provider } from "mobx-react";
 import bookingsStore from "@/store/bookings.store";
 import { Toaster } from "react-hot-toast";
+import { useRouter } from "next/router";
+import Loading from "@/components/defaultComponents/loading";
+import Router from "next/router";
+import { motion, AnimatePresence, useScroll } from "framer-motion";
 
 export default function App({ Component, pageProps }: AppProps) {
+  const [isFooterVisible, setIsFooterVisible] = useState(true);
+  const router = useRouter();
+  const { pathname } = router;
+  const excludedPaths = ["/login", "/signup","/dashboard"];
+  useEffect(() => {
+    // Check if the current pathname is in the excludedPaths array
+    if (excludedPaths.includes(pathname)) {
+      setIsFooterVisible(false);
+    } else {
+      setIsFooterVisible(true);
+    }
+  }, [pathname]);
+
+  const [loading, setLoading] = React.useState(false);
+  const { scrollYProgress } = useScroll();
+
+  useEffect(() => {
+    const handleStart = () => setLoading(true);
+    const handleComplete = () => setLoading(false);
+    Router.events.on("routeChangeStart", handleStart);
+    Router.events.on("routeChangeComplete", handleComplete);
+    Router.events.on("routeChangeError", handleComplete);
+    return () => {
+      Router.events.off("routeChangeStart", handleStart);
+      Router.events.off("routeChangeComplete", handleComplete);
+      Router.events.off("routeChangeError", handleComplete);
+    };
+  }, []);
+
   return (
     <div>
       <Header></Header>
-      <Provider bookingsStore={bookingsStore}>
-        <Component {...pageProps} />
-      </Provider>
-      <div className="mt-10">
-        <Footer />
-      </div>
+      <AnimatePresence>
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 1 }}
+          key={router.route}
+        >
+          <div>
+            <Provider bookingsStore={bookingsStore} usersStore={usersStore}>
+              {loading && <Loading />}
+              <Component {...pageProps} />
+            </Provider>
+          </div>
+        </motion.div>
+      </AnimatePresence>
+      {isFooterVisible && (
+        <div className="mt-10">
+          <Footer />
+        </div>
+      )}
       <Toaster position="bottom-right" reverseOrder={false} />
+      <motion.div
+        className="fixed top-0 left-0 right-0 h-[1px] bg-red-500 origin-left z-50"
+        style={{ scaleX: scrollYProgress }}
+      />
     </div>
   );
 }
