@@ -5,7 +5,6 @@ import Header from "@/components/defaultComponents/header";
 import Footer from "@/components/defaultComponents/footer";
 import { Provider } from "mobx-react";
 import bookingsStore from "@/store/bookings.store";
-import usersStore from "@/store/users.store";
 import { Toaster } from "react-hot-toast";
 import { useRouter } from "next/router";
 
@@ -26,7 +25,7 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <div>
       <Header></Header>
-      <Provider bookingsStore={bookingsStore} usersStore={usersStore}>
+      <Provider bookingsStore={bookingsStore}>
         <Component {...pageProps} />
       </Provider>
       {isFooterVisible &&(
