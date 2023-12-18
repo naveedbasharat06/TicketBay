@@ -1,16 +1,24 @@
-"use client";
-import React, { useRef } from "react";
+import React, { useRef,useEffect,useState } from "react";
 import EventCard from "./components/eventCard";
 import { eventData } from "@/constants";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { useMedia } from "react-use";
+import  lookupStore  from "@/store/lookups.store";
 
 function UpCommingEvents() {
   const isSmallScreen = useMedia("(max-width: 600px)");
   const isMediumScreen = useMedia("(min-width: 601px) and (max-width: 768px)");
   const sliderRef = useRef<Slider | null>(null);
+  const[events,setEvents]=useState([])
+  const { systemLookups, loading } = lookupStore;
+  useEffect(()=>{
+    const { events = [] } = systemLookups || {};
+    setEvents(events)
+  },[systemLookups])
+
+
   const settings = {
     dots: false,
     infinite: true,
@@ -63,10 +71,10 @@ function UpCommingEvents() {
         className={!isSmallScreen && !isMediumScreen ? "col-span-3" : "w-full"}
       >
         <Slider {...settings} ref={sliderRef}>
-          {eventData.map((card) => (
-            <div key={card.id}>
+          { events.map((card:any) => (
+            <div>
               <div className={isMediumScreen ? "pl-[20px]" : ""}>
-                <EventCard event={card} />
+                 <EventCard event={card.attributes} />
               </div>
             </div>
           ))}

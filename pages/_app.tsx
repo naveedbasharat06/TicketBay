@@ -6,6 +6,7 @@ import Footer from "@/components/defaultComponents/footer";
 import { Provider } from "mobx-react";
 import bookingsStore from "@/store/bookings.store";
 import usersStore from "@/store/users.store";
+import Store from "@/store/lookups.store";
 import { Toaster } from "react-hot-toast";
 import { useRouter } from "next/router";
 import Loading from "@/components/defaultComponents/loading";
@@ -53,7 +54,7 @@ export default function App({ Component, pageProps }: AppProps) {
           key={router.route}
         >
           <div>
-            <Provider bookingsStore={bookingsStore} usersStore={usersStore}>
+            <Provider bookingsStore={bookingsStore} usersStore={usersStore} Store={Store}>
               {loading && <Loading />}
               <Component {...pageProps} />
             </Provider>

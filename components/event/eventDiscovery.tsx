@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { eventsDropDown, eventData, EventType } from "@/constants";
+import { eventsDropDown, EventType } from "@/constants";
 import EventCard from "../landingPage/components/eventCard";
 import Pagination from "./customComponents/customPagination";
 import { useMedia } from "react-use";
 import { useRouter as useNavigation } from "next/navigation";
+import lookupStore from "@/store/lookups.store";
 
 function EventDiscovery() {
   const isSmallScreen = useMedia("(max-width: 600px)");
@@ -15,15 +16,22 @@ function EventDiscovery() {
   const [eventsPerPage, setEventsPerPage] = useState(5);
   const [activeFilter, setActiveFilter] = useState(1);
   const navigation = useNavigation();
+  const [events, setEvents] = useState([]);
+  const { systemLookups, loading } = lookupStore;
+  useEffect(() => {
+    const { events = [] } = systemLookups || {};
+    setEvents(events);
+  }, [systemLookups]);
   const applySortingAndFiltering = () => {
     let sortedEvents = [];
     // Apply sorting
     if (activeTab !== 0) {
-      sortedEvents = [...eventData].sort(
-        (eventA, eventB) => eventA.startingFrom - eventB.startingFrom
+      sortedEvents = [...events].sort(
+        (eventA: any, eventB: any) =>
+          eventA.attributes.startingFrom - eventB.attributes.startingFrom
       );
     } else {
-      sortedEvents = sortUpcomingEvents(eventData);
+      sortedEvents = sortUpcomingEvents(events);
     }
 
     // Apply filtering
@@ -31,17 +39,17 @@ function EventDiscovery() {
     switch (activeFilter) {
       case 2:
         filteredEvents = sortedEvents.filter(
-          (item: any) => item.eventType === "Featured"
+          (item: any) => item.attributes.eventType === "Featured"
         );
         break;
       case 3:
         filteredEvents = sortedEvents.filter(
-          (item: any) => item.eventType === "Festival"
+          (item: any) => item.attributes.eventType === "Festival"
         );
         break;
       case 4:
         filteredEvents = sortedEvents.filter(
-          (item: any) => item.eventType === "Party"
+          (item: any) => item.attributes.eventType === "Party"
         );
         break;
       default:
@@ -56,14 +64,14 @@ function EventDiscovery() {
   useEffect(() => {
     applySortingAndFiltering();
     isSmallScreen ? setEventsPerPage(5) : setEventsPerPage(12);
-  }, [activeTab, isSmallScreen, activeFilter]);
+  }, [activeTab, isSmallScreen, activeFilter,events]);
 
   // Only apply filters when the filter changes
   useEffect(() => {
     if (activeFilter > 1) {
       applySortingAndFiltering();
     }
-  }, [activeFilter]);
+  }, [activeFilter,events]);
 
   const searchInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = event.target.value;
@@ -73,8 +81,10 @@ function EventDiscovery() {
       applySortingAndFiltering();
     } else {
       // Filter events based on the search query
-      const filtered = eventData.filter((event) =>
-        event.eventdesc.toLowerCase().includes(newValue.toLowerCase())
+      const filtered = events.filter((event: any) =>
+        event.attributes.shortDescription
+          .toLowerCase()
+          .includes(newValue.toLowerCase())
       );
       setFilteredEvents(filtered);
     }
@@ -82,30 +92,16 @@ function EventDiscovery() {
 
   const sortUpcomingEvents = (events: any) => {
     const currentDate = new Date();
-    const currentMonth = currentDate
-      .toLocaleString("default", { month: "short" })
-      .toUpperCase();
-    const currentDay = currentDate.getDate();
-
     return events.filter((event: any) => {
-      const eventMonth = event.dateMonth;
-      const eventDay = parseInt(event.dateDay);
-
-      // Compare months
-      if (eventMonth > currentMonth) {
-        return true;
-      } else if (eventMonth === currentMonth) {
-        // If months are the same, compare days
-        return eventDay >= currentDay;
-      } else {
-        return false;
-      }
+      const eventDate = new Date(event.attributes.DateTime); // Assuming 'date' is the property containing the full date
+      return eventDate.getTime() >= currentDate.getTime();
     });
   };
+  
 
   const indexOfLastEvent = currentPage * eventsPerPage;
   const indexOfFirstEvent = indexOfLastEvent - eventsPerPage;
-  const currentEvents = filteredEvents.slice(
+  const currentEvents = filteredEvents?.slice(
     indexOfFirstEvent,
     indexOfLastEvent
   );
@@ -216,21 +212,21 @@ function EventDiscovery() {
       </div>
       <hr className="h-[2px] mt-1 bg-[#E3F5FF]" />
       <div className="grid lg:grid-cols-4 md:grid-cols-3 gap-5">
-        {currentEvents.map((event) => (
+        {currentEvents?.map((event: any) => (
           <div
             className="cursor-pointer"
             onClick={() => {
               navigation.push(`events/checkout?id=${event.id}`);
             }}
           >
-            <EventCard event={event} />
+            <EventCard event={event.attributes} />
           </div>
         ))}
       </div>
 
       <Pagination
         currentPage={currentPage}
-        totalPages={Math.ceil(filteredEvents.length / eventsPerPage)}
+        totalPages={Math.ceil(filteredEvents?.length / eventsPerPage)}
         onPageChange={paginate}
       />
     </div>
