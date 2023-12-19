@@ -12,6 +12,8 @@ import { useRouter } from "next/router";
 import Loading from "@/components/defaultComponents/loading";
 import Router from "next/router";
 import { motion, AnimatePresence, useScroll } from "framer-motion";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+export const queryClient = new QueryClient();
 
 export default function App({ Component, pageProps }: AppProps) {
   const [isFooterVisible, setIsFooterVisible] = useState(true);
@@ -45,6 +47,7 @@ export default function App({ Component, pageProps }: AppProps) {
 
   return (
     <div>
+      <QueryClientProvider client={queryClient}>
       <Header></Header>
       <AnimatePresence>
         <motion.div
@@ -71,6 +74,8 @@ export default function App({ Component, pageProps }: AppProps) {
         className="fixed top-0 left-0 right-0 h-[1px] bg-red-500 origin-left z-50"
         style={{ scaleX: scrollYProgress }}
       />
+      </QueryClientProvider>
+      
     </div>
   );
 }

@@ -1,34 +1,48 @@
 import React, { useState } from "react";
 import { useRouter as useNavigation } from "next/navigation";
-import CutomButton from "@/components/defaultComponents/customButtons/cutomButton";
 import { intialUserDetails } from "@/constants";
-import UsersStore from "@/store/users.store";
 import { v4 as uuidv4 } from "uuid";
 import { toast } from "react-hot-toast";
 import { Formik, Form, Field, ErrorMessage } from "formik";
+import { register } from "@/services/auth";
 import { signupValidation } from "@/components/Validations/validations";
+import { useMutation } from "@tanstack/react-query";
+import UsersStore from "@/store/users.store";
 
 function SignUp() {
   const navigation = useNavigation();
   const [userType, setUserType] = useState(1);
-  const [user, setUser] = useState(intialUserDetails);
-  const [confirmPassword, setConfirmPassword] = useState("");
-  function CreateUser(values: any, setSubmitting: any) {
+  const [user, setUser] = useState();
+
+  const { mutateAsync, error, isError } = useMutation({
+    mutationFn: register, // Provide your register function here
+    onSuccess: (data: any) => {
+      navigation.push(`/dashboard`);
+      toast.success("user registered")
+      UsersStore.addUser(user)
+    },
+    onError:(data:any)=>{
+      toast.error("please try again") 
+    }
+  });
+ 
+
+  async function CreateUser(values: any, setSubmitting: any) {
     const { confirmPassword, ...userData } = values; // Exclude confirmPassword from userData
     if (values.password !== values.confirmPassword) {
       toast.error("Passwords do not match.");
       setSubmitting(false);
       return;
     }
-    const uuid = uuidv4();
-    UsersStore.addUser({
-      ...userData,
-      id: uuid,
-    });
-    toast.success("Congratulations! You're all set!");
+    // const uuid = uuidv4();
+    // setUser({
+    //   ...userData,
+    //   // id: uuid,
+    // });
+    await mutateAsync({ ...userData} );
   }
 
-  console.log("user", JSON.parse(JSON.stringify(UsersStore.users)));
+      
   return (
     <div className=" lg:grid grid-cols-5 lg:h-[600px] bg-[#E3F5FF] mt-10 my-10 rounded-[4px] border lg:bg-[url('/assets/images/singup.png')] bg-bottom bg-left bg-no-repeat">
       <div className="col-span-3 p-10">
@@ -56,12 +70,7 @@ function SignUp() {
       <div className="col-span-2 p-5">
         <div className="bg-[#ffff] h-full rounded-[4px] p-5">
           <Formik
-            initialValues={{
-              name: user.name,
-              email: user.email,
-              password: user.password,
-              confirmPassword: confirmPassword,
-            }}
+            initialValues={intialUserDetails}
             validationSchema={signupValidation}
             onSubmit={CreateUser}
           >
@@ -120,12 +129,12 @@ function SignUp() {
                   type="text"
                   placeholder="Name"
                   className="h-full w-full outline-none"
-                  name="name"
+                  name={"username"}
                 />
               </div>
               <div className="h-3">
                 <ErrorMessage
-                  name="name"
+                  name={"username"}
                   component="span"
                   className="ml-1 text-[13px] font-[500] text-[#FD2F09]"
                 />

@@ -1,5 +1,6 @@
 import React, { FC } from "react";
 import { useMedia } from "react-use";
+import { months } from "@/constants";
 interface props {
   event?: any;
 }
@@ -7,7 +8,6 @@ const EventCard: FC<props> = ({ event }) => {
   const isSmallScreen = useMedia("(max-width: 600px)");
   const isMediumScreen = useMedia("(min-width: 601px) and (max-width: 768px)");
   const dateObject = new Date(event.DateTime);
-  const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
   const monthAbbreviation = months[dateObject.getMonth()];
   const day = dateObject.getDate();
   return (

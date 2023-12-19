@@ -1,5 +1,5 @@
-import React, { FC, useState } from "react";
-import { eventData, initialBookingState, recipientState } from "@/constants";
+import React, { FC, useState, useEffect } from "react";
+import {months, initialBookingState, recipientState } from "@/constants";
 import CutomButton from "../defaultComponents/customButtons/cutomButton";
 import NewsLetter from "../defaultComponents/newsLetter";
 import { useMedia } from "react-use";
@@ -7,6 +7,7 @@ import bookingsStore from "@/store/bookings.store";
 import { v4 as uuidv4 } from "uuid";
 import { toast } from "react-hot-toast";
 import { Payment } from "@/components/payment";
+import lookupStore from "@/store/lookups.store";
 
 interface props {
   id?: any;
@@ -15,12 +16,27 @@ interface props {
 const TicketSummury: FC<props> = ({ id }) => {
   const isSmallScreen = useMedia("(max-width: 600px)");
   const isMediumScreen = useMedia("(min-width: 601px) and (max-width: 1023px)");
-  const singleEvent = eventData.filter((item) => item.id === parseInt(id));
+  const [events, setEvents] = useState([]);
+  const singleEvent = events.filter(
+    (item: any) => item.id === parseInt(id)
+  ) as { [x: string]: any };
   const [bookings, setBookings] = useState(initialBookingState);
   const [recipient, setRecipient] = useState(recipientState);
   const [eventUpdate, setEventUpdate] = useState(false);
   const [newsUpdate, setNewsUpdate] = useState(false);
-  console.log("bookings", JSON.parse(JSON.stringify(bookingsStore.bookings)));
+
+  const { systemLookups, loading } = lookupStore;
+  useEffect(() => {
+    const { events = [] } = systemLookups || {};
+    setEvents(events);
+  }, [systemLookups]);
+  console.log("bookings", JSON.parse(JSON.stringify(singleEvent)));
+  const dateObject = new Date(singleEvent[0]?.attributes.DateTime);
+
+  const monthShort = months[dateObject.getMonth()];
+  const day = dateObject.getDate();
+  const year = dateObject.getFullYear();
+
   const inputFieldChange = (e: any) => {
     const { name, value } = e.target;
     // If the property is inside ticketDetails, update it accordingly
@@ -124,7 +140,7 @@ const TicketSummury: FC<props> = ({ id }) => {
           <div className="lg:flex mt-[30px] gap-6">
             <div>
               <img
-                src={singleEvent[0]?.eventThunbnil}
+                src={singleEvent[0]?.attributes?.imageUrl}
                 alt="img"
                 className="rounded-[4px] lg:w-[380px] lg:h-[237px] w-full md:h-[400px]"
               />
@@ -133,14 +149,14 @@ const TicketSummury: FC<props> = ({ id }) => {
             <div className="lg:w-[360px]">
               <div>
                 <span className="text-[36px] font-[600] text-[#133142]">
-                  {singleEvent[0]?.eventdesc}
+                  {singleEvent[0]?.attributes?.shortDescription}
                 </span>
               </div>
 
               <div className="flex mt-2 gap-3">
                 <img src="/assets/images/callender.svg" alt="" />
                 <span className="text-[14px] text-[#979797] font-[500]">
-                  {singleEvent[0]?.dateMonth + " " + singleEvent[0]?.dateDay}
+                  {monthShort + " " + day +" "+ year}
                 </span>
               </div>
 
@@ -149,14 +165,14 @@ const TicketSummury: FC<props> = ({ id }) => {
                   <img src="/assets/images/location.svg" alt="" />
                 </div>
                 <span className="text-[14px] text-[#979797] font-[500]">
-                  {singleEvent[0]?.location}
+                  {singleEvent[0]?.attributes?.location}
                 </span>
               </div>
 
               <div className="flex mt-2 gap-3">
                 <img src="/assets/images/time.svg" alt="" />
                 <span className="text-[14px] text-[#979797] font-[500]">
-                  {singleEvent[0]?.lagos}
+                  {singleEvent[0]?.attributes?.lagos}
                 </span>
               </div>
             </div>
