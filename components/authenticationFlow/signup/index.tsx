@@ -1,31 +1,25 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useRouter as useNavigation } from "next/navigation";
 import { intialUserDetails } from "@/constants";
-import { v4 as uuidv4 } from "uuid";
 import { toast } from "react-hot-toast";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { register } from "@/services/auth";
 import { signupValidation } from "@/components/Validations/validations";
 import { useMutation } from "@tanstack/react-query";
-import UsersStore from "@/store/users.store";
 
 function SignUp() {
   const navigation = useNavigation();
   const [userType, setUserType] = useState(1);
-  const [user, setUser] = useState();
-
   const { mutateAsync, error, isError } = useMutation({
     mutationFn: register, // Provide your register function here
-    onSuccess: (data: any) => {
-      navigation.push(`/dashboard`);
-      toast.success("user registered")
-      UsersStore.addUser(user)
+    onSuccess: (responce: any) => {
+      navigation.push(`/login`);
+      toast.success("User registered successfully");
     },
-    onError:(data:any)=>{
-      toast.error("please try again") 
-    }
+    onError: (error: any) => {
+      toast.error(error.response.data.error.message);
+    },
   });
- 
 
   async function CreateUser(values: any, setSubmitting: any) {
     const { confirmPassword, ...userData } = values; // Exclude confirmPassword from userData
@@ -34,15 +28,12 @@ function SignUp() {
       setSubmitting(false);
       return;
     }
-    // const uuid = uuidv4();
-    // setUser({
-    //   ...userData,
-    //   // id: uuid,
-    // });
-    await mutateAsync({ ...userData} );
+    await mutateAsync({
+      ...userData,
+      roleType: userType === 1 ? "user" : "vendor",
+    });
   }
 
-      
   return (
     <div className=" lg:grid grid-cols-5 lg:h-[600px] bg-[#E3F5FF] mt-10 my-10 rounded-[4px] border lg:bg-[url('/assets/images/singup.png')] bg-bottom bg-left bg-no-repeat">
       <div className="col-span-3 p-10">

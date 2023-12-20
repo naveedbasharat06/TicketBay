@@ -44,7 +44,8 @@ export const intialUserDetails = {
   username: "",
   email: "",
   password: "",
-  role: "Public",
+  role: "2",
+  roleType:""
 };
 
 export const CUSTOMMENU = [

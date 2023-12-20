@@ -4,19 +4,23 @@ import { useRouter as useNavigation } from "next/navigation";
 import { toast } from "react-hot-toast";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { loginValidation } from "@/components/Validations/validations";
+import { useMutation } from "@tanstack/react-query";
+import { login } from "@/services/auth";
+
 function Login() {
   const navigation = useNavigation();
-  const userLogin = (values: any, setSubmitting: any) => {
-    const user = UsersStore.getUserByEmail(values.email);
-    if (user && user.password === values.password) {
-      const id = user.id;
-      UsersStore.setCurrentUserId(id);
-      navigation.push("/dashboard")
-
-    } else {
-      // Invalid credentials
-      toast.error("Invalid email or password");
-    }
+  const { mutateAsync} = useMutation({
+    mutationFn: login, // Provide your login function here
+    onSuccess: (responce: any) => {
+      navigation.push(`/dashboard`);
+      toast.success("User authenticated successfully");
+    },
+    onError: (error: any) => {
+      toast.error(error.response.data.error.message);
+    },
+  });
+  const userLogin = async (values: any, setSubmitting: any) => {
+    await mutateAsync({ ...values });
     setSubmitting(false);
   };
 
@@ -48,7 +52,7 @@ function Login() {
       <div className="col-span-2 p-5">
         <div className="bg-[#ffff] lg:h-full rounded-[4px] p-10">
           <Formik
-            initialValues={{ email: "", password: "" }}
+            initialValues={{ identifier: "", password: "" }}
             validationSchema={loginValidation}
             onSubmit={userLogin}
           >
@@ -57,7 +61,7 @@ function Login() {
                 <div>
                   <Field
                     type="email"
-                    name="email"
+                    name="identifier"
                     placeholder="Email address"
                     className="h-full w-full outline-none"
                   />
@@ -65,7 +69,7 @@ function Login() {
               </div>
               <div className="h-3">
                 <ErrorMessage
-                  name="email"
+                  name="identifier"
                   component="span"
                   className="ml-1 text-[13px] font-[500] text-[#FD2F09]"
                 />
