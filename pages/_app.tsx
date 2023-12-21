@@ -13,13 +13,14 @@ import Loading from "@/components/defaultComponents/loading";
 import Router from "next/router";
 import { motion, AnimatePresence, useScroll } from "framer-motion";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import SidebarLayout from "@/components/dashboard/customComponents/sidebar";
 export const queryClient = new QueryClient();
 
 export default function App({ Component, pageProps }: AppProps) {
   const [isFooterVisible, setIsFooterVisible] = useState(true);
   const router = useRouter();
   const { pathname } = router;
-  const excludedPaths = ["/login", "/signup","/dashboard"];
+  const excludedPaths = ["/login", "/signup", "/dashboard"];
   useEffect(() => {
     // Check if the current pathname is in the excludedPaths array
     if (excludedPaths.includes(pathname)) {
@@ -31,7 +32,6 @@ export default function App({ Component, pageProps }: AppProps) {
 
   const [loading, setLoading] = React.useState(false);
   const { scrollYProgress } = useScroll();
-
   useEffect(() => {
     const handleStart = () => setLoading(true);
     const handleComplete = () => setLoading(false);
@@ -46,36 +46,47 @@ export default function App({ Component, pageProps }: AppProps) {
   }, []);
 
   return (
-    <div>
+    <div className={`${!pathname.includes("/dashboard") && "pl-8 pr-8"}`}>
       <QueryClientProvider client={queryClient}>
-      <Header></Header>
-      <AnimatePresence>
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 1 }}
-          key={router.route}
-        >
-          <div>
-            <Provider bookingsStore={bookingsStore} usersStore={usersStore} Store={Store}>
-              {loading && <Loading />}
-              <Component {...pageProps} />
-            </Provider>
+        {!pathname.startsWith("/dashboard") && <Header></Header>}
+        <AnimatePresence>
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 1 }}
+            key={router.route}
+          >
+            <div>
+              <Provider
+                bookingsStore={bookingsStore}
+                usersStore={usersStore}
+                Store={Store}
+              >
+                {loading && <Loading />}
+                {pathname.startsWith("/dashboard") ? (
+                  <SidebarLayout>
+                    <Component {...pageProps} />
+                  </SidebarLayout>
+                ) : (
+                  <div>
+                    <Component {...pageProps} />
+                  </div>
+                )}
+              </Provider>
+            </div>
+          </motion.div>
+        </AnimatePresence>
+        {isFooterVisible && !pathname.startsWith("/dashboard")&& (
+          <div className="mt-10">
+            <Footer />
           </div>
-        </motion.div>
-      </AnimatePresence>
-      {isFooterVisible && (
-        <div className="mt-10">
-          <Footer />
-        </div>
-      )}
-      <Toaster position="bottom-right" reverseOrder={false} />
-      <motion.div
-        className="fixed top-0 left-0 right-0 h-[1px] bg-red-500 origin-left z-50"
-        style={{ scaleX: scrollYProgress }}
-      />
+        )}
+        <Toaster position="bottom-right" reverseOrder={false} />
+        <motion.div
+          className="fixed top-0 left-0 right-0 h-[1px] bg-red-500 origin-left z-50"
+          style={{ scaleX: scrollYProgress }}
+        />
       </QueryClientProvider>
-      
     </div>
   );
 }

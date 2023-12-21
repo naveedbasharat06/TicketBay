@@ -75,6 +75,34 @@ export const CUSTOMMENU = [
   },
 ];
 
+export const sidebar=[
+  {
+    id:1,
+    menu:"Browse",
+    iconUrl:"/assets/images/brows.svg"
+  },
+  {
+    id:2,
+    menu:"My Bookings",
+    iconUrl:"/assets/images/booking.svg"
+  },
+  {
+    id:3,
+    menu:"Organisers",
+    iconUrl:"/assets/images/organizer.svg"
+  },
+  {
+    id:4,
+    menu:"Profile",
+    iconUrl:"/assets/images/profile.svg"
+  }
+  , {
+    id:5,
+    menu:"Logout",
+    iconUrl:"/assets/images/logout.svg"
+  }
+]
+
 export const DashboardMenu = [
   {
     id: 1,
