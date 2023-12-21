@@ -6,15 +6,24 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { HeaderDropDown } from "../../constants";
 import UsersStore from "@/store/users.store";
+import { useRouter as useNavigation } from "next/navigation";
 
 function Header() {
   const router = useRouter();
+  const navigation = useNavigation();
   const { pathname } = router;
   const [isDashboard, setIsDashboard] = useState(true);
   const [isOpenMenu, setIsOpenMenu] = useState<boolean>(false);
   const [isDropdownVisible, setIsDropdownVisible] = useState(false);
-
+  const [userId, setUserId] = useState(null);
+  const [userName, setUserName] = useState("");
+  const firstLetter = userName?.charAt(0).toUpperCase();
   useEffect(() => {
+    setUserId(UsersStore?.users[0]?.id);
+    setUserName(UsersStore?.users[0]?.username);
+  }, [UsersStore]);
+  useEffect(() => {
+    console.log(pathname)
     if (pathname.includes("dashboard")) {
       setIsDashboard(true);
     } else {
@@ -24,7 +33,10 @@ function Header() {
   const DropDownClick = (menu: any) => {
     if (menu === 1) {
     } else {
-      UsersStore.setCurrentUserId(null);
+      UsersStore.clearToken();
+      UsersStore.removeUser(userId);
+      setUserId(null);
+      navigation.push("/");
     }
   };
 
@@ -69,7 +81,7 @@ function Header() {
 
         <CutomButton label={"Create events"}></CutomButton>
 
-        {UsersStore.currentUserId !== null && (
+        {userId && (
           <div
             className="h-[40px] w-[40px] rounded-full border flex justify-center items-center bg-[#E3F5FF] cursor-pointer"
             onClick={() => {
@@ -78,7 +90,7 @@ function Header() {
                 : setIsDropdownVisible(true);
             }}
           >
-            <span className="text-[18px] font-[500] text-[#133142]">A</span>
+            <span className="text-[18px] font-[500] text-[#133142]">{firstLetter}</span>
           </div>
         )}
 
