@@ -9,6 +9,7 @@ type LookupFunctions = {
 export const fetchAllLookups = async (): Promise<LookupData> => {
   const lookupFunctions: LookupFunctions = {
     events: getEvents,
+    categories:getCategories
     // Add other functions as needed
   };
 
@@ -23,5 +24,9 @@ export const fetchAllLookups = async (): Promise<LookupData> => {
 
 export const getEvents = async () => {
   const response = await apiService.get<any>("/api/posts");
+  return response.data;
+};
+export const getCategories = async () => {
+  const response = await apiService.get<any>("/api/events-categories");
   return response.data;
 };

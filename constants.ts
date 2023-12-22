@@ -45,9 +45,27 @@ export const intialUserDetails = {
   email: "",
   password: "",
   role: "2",
-  roleType:""
+  roleType: "",
 };
 
+export const routLabels = [
+  {
+    root: "/dashboard",
+    label: "Browse",
+  },
+  {
+    root: "/dashboard/bookings",
+    label: "Bookings",
+  },
+  {
+    root: "/dashboard/organisers",
+    label: "Organisers",
+  },
+  {
+    root: "/dashboard/profile",
+    label: "Profile",
+  },
+];
 export const CUSTOMMENU = [
   {
     id: 1,
@@ -75,33 +93,38 @@ export const CUSTOMMENU = [
   },
 ];
 
-export const sidebar=[
+export const sidebar = [
   {
-    id:1,
-    menu:"Browse",
-    iconUrl:"/assets/images/brows.svg"
+    id: 1,
+    menu: "Browse",
+    iconUrl: "/assets/images/brows.svg",
+    short: "Browse",
   },
   {
-    id:2,
-    menu:"My Bookings",
-    iconUrl:"/assets/images/booking.svg"
+    id: 2,
+    menu: "My Bookings",
+    iconUrl: "/assets/images/booking.svg",
+    short: "Bookings",
   },
   {
-    id:3,
-    menu:"Organisers",
-    iconUrl:"/assets/images/organizer.svg"
+    id: 3,
+    menu: "Organisers",
+    iconUrl: "/assets/images/organizer.svg",
+    short: "Organisers",
   },
   {
-    id:4,
-    menu:"Profile",
-    iconUrl:"/assets/images/profile.svg"
-  }
-  , {
-    id:5,
-    menu:"Logout",
-    iconUrl:"/assets/images/logout.svg"
-  }
-]
+    id: 4,
+    menu: "Profile",
+    iconUrl: "/assets/images/profile.svg",
+    short: "Profile",
+  },
+  {
+    id: 5,
+    menu: "Logout",
+    iconUrl: "/assets/images/logout.svg",
+    short: "Logout",
+  },
+];
 
 export const DashboardMenu = [
   {

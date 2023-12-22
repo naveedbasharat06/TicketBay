@@ -83,7 +83,7 @@ export default function App({ Component, pageProps }: AppProps) {
         )}
         <Toaster position="bottom-right" reverseOrder={false} />
         <motion.div
-          className="fixed top-0 left-0 right-0 h-[1px] bg-red-500 origin-left z-50"
+          className="fixed top-0 left-0 right-0 h-[1px] bg-red-500 origin-left z-[99999]"
           style={{ scaleX: scrollYProgress }}
         />
       </QueryClientProvider>
