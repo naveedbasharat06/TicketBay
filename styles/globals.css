@@ -141,5 +141,9 @@ body::-webkit-scrollbar{
   }
 }
 
+.hid-overflow::-webkit-scrollbar{
+  display: none;
+ }
+
 
 

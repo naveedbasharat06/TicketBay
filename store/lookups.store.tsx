@@ -35,6 +35,7 @@ export class LookupStore {
       ...lookups,
       events: lookups.events,
       getCategories:lookups.getCategories,
+      bookings:lookups.bookings,
     };
   };
 
