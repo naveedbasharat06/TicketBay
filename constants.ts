@@ -13,15 +13,16 @@ const RECIPIENT_EMAIL = "email";
 const RECIPIENT_PHONE = "phone";
 const NEWS_UPDATE = "newsUpdate";
 const EVENT_UPDATE = "eventUpdate";
+const BOOKINGID = "bookingId";
 
 export const initialBookingState = {
-  [ID]: "",
-  [USERID]: "1234",
+  [USERID]: "",
   [EVENTID]: "",
   [FIRST_NAME]: "",
   [LAST_NAME]: "",
   [EMAIL]: "",
   [CONFIRM_EMAIL]: "",
+  [BOOKINGID]: "",
   [NEWS_UPDATE]: false,
   [EVENT_UPDATE]: false,
   [RECIPIENT]: [] as {

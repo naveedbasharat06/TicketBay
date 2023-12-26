@@ -1,19 +1,49 @@
 import React, { useState, useEffect } from "react";
 import BookingCard from "./components/bookingCard";
 import lookupStore from "@/store/lookups.store";
+import UsersStore from "@/store/users.store";
 
 function MyBookings() {
   const { systemLookups, loading } = lookupStore;
   const [selectedTab, setSelectedTab] = useState(1);
   const [events, setEvents] = useState<any>([]);
-  const uniqueDates = Array.from(new Set(events.map((event:any) => {
-    const dateTime = new Date(event.attributes.DateTime);
-    return new Date(Date.UTC(dateTime.getFullYear(), dateTime.getMonth(), dateTime.getDate())).toISOString().split('T')[0];
-  })));
-  
+  const [bookings, setBookings] = useState<any>([]);
+  const [userId, setUserId] = useState<string>("");
+
+  const eventIds: number[] = bookings.map(
+    (booking: { attributes: { eventId: any } }) => booking.attributes.eventId
+  );
+  const mybookings = events.filter((event: { id: { toString: () => number } }) =>
+  eventIds.includes(event.id.toString())
+);
+
+  const uniqueDates = Array.from(
+    new Set(
+      mybookings.map((event: any) => {
+        const dateTime = new Date(event.attributes.DateTime);
+        return new Date(
+          Date.UTC(
+            dateTime.getFullYear(),
+            dateTime.getMonth(),
+            dateTime.getDate()
+          )
+        )
+          .toISOString()
+          .split("T")[0];
+      })
+    )
+  );
   useEffect(() => {
+    setUserId(String(UsersStore?.users[0]?.id));
     setEvents(systemLookups.events);
-  }, [systemLookups]);
+    const filteredBookings = systemLookups.bookings.filter(
+      (booking: { attributes: { userId: any } }) =>
+        String(booking.attributes.userId) === userId
+    );
+    setBookings(filteredBookings);
+  }, [systemLookups, UsersStore, userId]);
+  console.log(JSON.parse(JSON.stringify(mybookings)))
+
   return (
     <div>
       <div className="flex gap-5">
@@ -66,13 +96,19 @@ function MyBookings() {
         {uniqueDates.map((date: any) => (
           <div>
             <div className="mb-2">
-              <span className="text-[16px] font-[500] text-[#797979]">{date}</span>
+              <span className="text-[16px] font-[500] text-[#797979]">
+                {date}
+              </span>
             </div>
-            {events.map((item: any) => {
-            const storedDate = new Date(item.attributes.DateTime);
-            const offsetInMinutes = storedDate.getTimezoneOffset();
-            const adjustedDate = new Date(storedDate.getTime() - offsetInMinutes * 60 * 1000);
-            const formattedStoredDate = adjustedDate.toISOString().split("T")[0];
+            {mybookings.map((item: any) => {
+              const storedDate = new Date(item.attributes.DateTime);
+              const offsetInMinutes = storedDate.getTimezoneOffset();
+              const adjustedDate = new Date(
+                storedDate.getTime() - offsetInMinutes * 60 * 1000
+              );
+              const formattedStoredDate = adjustedDate
+                .toISOString()
+                .split("T")[0];
               if (date === formattedStoredDate)
                 return (
                   <div className="mb-2 pl-1">

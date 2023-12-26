@@ -2,8 +2,13 @@ import React, { useState, useEffect } from "react";
 import { CUSTOMMENU } from "../../constants";
 import CutomButton from "./customButtons/cutomButton";
 import Link from "next/link";
+import UsersStore from "@/store/users.store";
 function Header() {
   const [isOpenMenu, setIsOpenMenu] = useState<boolean>(false);
+  const [userId, setUserId] = useState(null);
+  useEffect(() => {
+    setUserId(UsersStore?.users[0]?.id);
+  }, [UsersStore, userId]);
   return (
     <div className="sticky top-[0px] h-[58px] lg:flex items-center justify-between bg-[white] z-50">
       <div className="flex justify-between items-center">
@@ -31,13 +36,21 @@ function Header() {
           !isOpenMenu ? "hidden" : ""
         }`}
       >
-        { CUSTOMMENU.map((item) => (
+        {CUSTOMMENU.map((item) => (
           <div className="sm:my-1 xs:my-1" key={item.menu}>
             <Link
-              href={item.menu === "Home" ? "/" : "/" + item.menu.toLowerCase()}
+              href={
+                userId !== undefined && item.menu === "Login"
+                  ? `/dashboard`
+                  : `${
+                      item.menu === "Home" ? "/" : "/" + item.menu.toLowerCase()
+                    }`
+              }
             >
               <span className="cursor-pointer text-[#797979] text-sm hover:text-[#FF7A62]">
-                {item.menu}
+                {userId !== undefined && item.menu === "Login"
+                  ? "Dashboard"
+                  : `${item.menu}`}
               </span>
             </Link>
           </div>
