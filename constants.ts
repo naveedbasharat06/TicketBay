@@ -49,6 +49,29 @@ export const intialUserDetails = {
   roleType: "",
 };
 
+export const dashboardDropdown=[
+  {
+    id:1,
+    menu:"View"
+  },
+  {
+    id:2,
+    menu:"Download"
+  },
+  {
+    id:3,
+    menu:"Print"
+  },
+  {
+    id:4,
+    menu:"Archive"
+  },
+  {
+    id:5,
+    menu:"Delete"
+  },
+]
+
 export const routLabels = [
   {
     root: "/dashboard",

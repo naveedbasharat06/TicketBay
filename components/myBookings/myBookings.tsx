@@ -9,6 +9,7 @@ function MyBookings() {
   const [events, setEvents] = useState<any>([]);
   const [bookings, setBookings] = useState<any>([]);
   const [userId, setUserId] = useState<string>("");
+  const [eventId, setEventId] = useState();
 
   const eventIds: number[] = bookings.map(
     (booking: { attributes: { eventId: any } }) => booking.attributes.eventId
@@ -111,8 +112,8 @@ function MyBookings() {
                 .split("T")[0];
               if (date === formattedStoredDate)
                 return (
-                  <div className="mb-2 pl-1">
-                    <BookingCard booking={item.attributes}></BookingCard>
+                  <div className="mb-2 pl-1" onClick={()=>{setEventId(item.id)}}>
+                    <BookingCard events={item} bookings={bookings} eventId={eventId}></BookingCard>
                   </div>
                 );
             })}

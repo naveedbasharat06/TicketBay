@@ -144,6 +144,13 @@ body::-webkit-scrollbar{
 .hid-overflow::-webkit-scrollbar{
   display: none;
  }
+ .hover-menu:hover{
+  background-color: #FD2F09;
+  
+ }
+ .hover-menu:hover span {
+  color:white
+}
 
 
 
