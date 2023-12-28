@@ -9,18 +9,32 @@ function MyBookings() {
   const [events, setEvents] = useState<any>([]);
   const [bookings, setBookings] = useState<any>([]);
   const [userId, setUserId] = useState<string>("");
-  const [eventId, setEventId] = useState();
+  const [sortedDate, setSortedDate] = useState<any>([]);
+  
 
-  const eventIds: number[] = bookings.map(
-    (booking: { attributes: { eventId: any } }) => booking.attributes.eventId
+  const eventIds: number[] = bookings?.map(
+    (booking: { attributes: { eventId: any } }) => booking?.attributes.eventId
   );
-  const mybookings = events.filter((event: { id: { toString: () => number } }) =>
-  eventIds.includes(event.id.toString())
-);
+  const mybookings = events?.filter(
+    (event: { id: { toString: () => number } }) =>
+      eventIds?.includes(event.id.toString())
+  );
+
+  useEffect(() => {
+    if (selectedTab == 1) {
+      setSortedDate(uniqueDates);
+    }
+    if (selectedTab == 2) {
+      const sortedDates = uniqueDates.sort(
+        (a: any, b: any) => new Date(a).getTime() - new Date(b).getTime()
+      );
+      setSortedDate(sortedDates);
+    }
+  }, [selectedTab]);
 
   const uniqueDates = Array.from(
     new Set(
-      mybookings.map((event: any) => {
+      mybookings?.map((event: any) => {
         const dateTime = new Date(event.attributes.DateTime);
         return new Date(
           Date.UTC(
@@ -37,13 +51,13 @@ function MyBookings() {
   useEffect(() => {
     setUserId(String(UsersStore?.users[0]?.id));
     setEvents(systemLookups.events);
-    const filteredBookings = systemLookups.bookings.filter(
+    const filteredBookings = systemLookups?.bookings?.filter(
       (booking: { attributes: { userId: any } }) =>
         String(booking.attributes.userId) === userId
     );
     setBookings(filteredBookings);
   }, [systemLookups, UsersStore, userId]);
-  console.log(JSON.parse(JSON.stringify(mybookings)))
+  console.log(JSON.parse(JSON.stringify(uniqueDates)));
 
   return (
     <div>
@@ -94,7 +108,7 @@ function MyBookings() {
       </div>
 
       <div className="lg:pr-[120px] mt-2  overflow-x-auto hid-overflow">
-        {uniqueDates.map((date: any) => (
+        {sortedDate.map((date: any) => (
           <div>
             <div className="mb-2">
               <span className="text-[16px] font-[500] text-[#797979]">
@@ -112,8 +126,11 @@ function MyBookings() {
                 .split("T")[0];
               if (date === formattedStoredDate)
                 return (
-                  <div className="mb-2 pl-1" onClick={()=>{setEventId(item.id)}}>
-                    <BookingCard events={item} bookings={bookings} eventId={eventId}></BookingCard>
+                  <div className="mb-2 pl-1">
+                    <BookingCard
+                      events={item}
+                      bookings={bookings}
+                    ></BookingCard>
                   </div>
                 );
             })}
