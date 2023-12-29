@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import BookingCard from "./components/bookingCard";
 import lookupStore from "@/store/lookups.store";
 import UsersStore from "@/store/users.store";
+import { motion, AnimatePresence, useScroll } from "framer-motion";
 
 function MyBookings() {
   const { systemLookups, loading } = lookupStore;
@@ -10,7 +11,6 @@ function MyBookings() {
   const [bookings, setBookings] = useState<any>([]);
   const [userId, setUserId] = useState<string>("");
   const [sortedDate, setSortedDate] = useState<any>([]);
-  
 
   const eventIds: number[] = bookings?.map(
     (booking: { attributes: { eventId: any } }) => booking?.attributes.eventId
@@ -19,19 +19,6 @@ function MyBookings() {
     (event: { id: { toString: () => number } }) =>
       eventIds?.includes(event.id.toString())
   );
-
-  useEffect(() => {
-    if (selectedTab == 1) {
-      setSortedDate(uniqueDates);
-    }
-    if (selectedTab == 2) {
-      const sortedDates = uniqueDates.sort(
-        (a: any, b: any) => new Date(a).getTime() - new Date(b).getTime()
-      );
-      setSortedDate(sortedDates);
-    }
-  }, [selectedTab]);
-
   const uniqueDates = Array.from(
     new Set(
       mybookings?.map((event: any) => {
@@ -48,6 +35,19 @@ function MyBookings() {
       })
     )
   );
+
+  useEffect(() => {
+    if (selectedTab == 1) {
+      setSortedDate(uniqueDates);
+    }
+    if (selectedTab == 2) {
+      const sortedDates = uniqueDates.sort(
+        (a: any, b: any) => new Date(a).getTime() - new Date(b).getTime()
+      );
+      setSortedDate(sortedDates);
+    }
+  }, [selectedTab]);
+
   useEffect(() => {
     setUserId(String(UsersStore?.users[0]?.id));
     setEvents(systemLookups.events);
@@ -58,6 +58,25 @@ function MyBookings() {
     setBookings(filteredBookings);
   }, [systemLookups, UsersStore, userId]);
   console.log(JSON.parse(JSON.stringify(uniqueDates)));
+  const container = {
+    hidden: { opacity: 1, scale: 0 },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      transition: {
+        delayChildren: 0.2,
+        staggerChildren: 0.1,
+      },
+    },
+  };
+
+  const item = {
+    hidden: { y: 20, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+    },
+  };
 
   return (
     <div>
@@ -106,10 +125,17 @@ function MyBookings() {
       <div className="pr-[125px] mb-5 mt-3">
         <hr />
       </div>
+      <AnimatePresence></AnimatePresence>
 
-      <div className="lg:pr-[120px] mt-2  overflow-x-auto hid-overflow">
-        {sortedDate.map((date: any) => (
-          <div>
+      <motion.ul
+        className="lg:pr-[120px] mt-2  overflow-x-auto hid-overflow container"
+        variants={container}
+        initial="hidden"
+        animate="visible"
+        key={selectedTab}
+      >
+        {sortedDate.map((date: any, index: any) => (
+          <motion.li key={index} className="item" variants={item}>
             <div className="mb-2">
               <span className="text-[16px] font-[500] text-[#797979]">
                 {date}
@@ -134,9 +160,9 @@ function MyBookings() {
                   </div>
                 );
             })}
-          </div>
+          </motion.li>
         ))}
-      </div>
+      </motion.ul>
     </div>
   );
 }
