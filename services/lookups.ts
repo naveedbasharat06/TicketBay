@@ -24,7 +24,7 @@ export const fetchAllLookups = async (): Promise<LookupData> => {
 };
 
 export const getEvents = async () => {
-  const response = await apiService.get<any>("/api/posts");
+  const response = await apiService.get<any>("/api/events");
   return response.data;
 };
 export const getCategories = async () => {
