@@ -3,7 +3,7 @@ export default function Document() {
   return (
     <Html lang="en">
       <Head />
-      <body className="pl-8 pr-8">
+      <body>
         <Main />
         <NextScript />
       </body>

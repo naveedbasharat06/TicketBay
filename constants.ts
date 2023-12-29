@@ -13,15 +13,16 @@ const RECIPIENT_EMAIL = "email";
 const RECIPIENT_PHONE = "phone";
 const NEWS_UPDATE = "newsUpdate";
 const EVENT_UPDATE = "eventUpdate";
+const BOOKINGID = "bookingId";
 
 export const initialBookingState = {
-  [ID]: "",
-  [USERID]: "1234",
+  [USERID]: "",
   [EVENTID]: "",
   [FIRST_NAME]: "",
   [LAST_NAME]: "",
   [EMAIL]: "",
   [CONFIRM_EMAIL]: "",
+  [BOOKINGID]: "",
   [NEWS_UPDATE]: false,
   [EVENT_UPDATE]: false,
   [RECIPIENT]: [] as {
@@ -45,9 +46,50 @@ export const intialUserDetails = {
   email: "",
   password: "",
   role: "2",
-  roleType:""
+  roleType: "",
 };
 
+export const dashboardDropdown=[
+  {
+    id:1,
+    menu:"View"
+  },
+  {
+    id:2,
+    menu:"Download"
+  },
+  {
+    id:3,
+    menu:"Print"
+  },
+  {
+    id:4,
+    menu:"Archive"
+  },
+  {
+    id:5,
+    menu:"Delete"
+  },
+]
+
+export const routLabels = [
+  {
+    root: "/dashboard",
+    label: "Browse",
+  },
+  {
+    root: "/dashboard/bookings",
+    label: "Bookings",
+  },
+  {
+    root: "/dashboard/organisers",
+    label: "Organisers",
+  },
+  {
+    root: "/dashboard/profile",
+    label: "Profile",
+  },
+];
 export const CUSTOMMENU = [
   {
     id: 1,
@@ -72,6 +114,39 @@ export const CUSTOMMENU = [
   {
     id: 6,
     menu: "Login",
+  },
+];
+
+export const sidebar = [
+  {
+    id: 1,
+    menu: "Browse",
+    iconUrl: "/assets/images/brows.svg",
+    short: "Browse",
+  },
+  {
+    id: 2,
+    menu: "My Bookings",
+    iconUrl: "/assets/images/booking.svg",
+    short: "Bookings",
+  },
+  {
+    id: 3,
+    menu: "Organisers",
+    iconUrl: "/assets/images/organizer.svg",
+    short: "Organisers",
+  },
+  {
+    id: 4,
+    menu: "Profile",
+    iconUrl: "/assets/images/profile.svg",
+    short: "Profile",
+  },
+  {
+    id: 5,
+    menu: "Logout",
+    iconUrl: "/assets/images/logout.svg",
+    short: "Logout",
   },
 ];
 

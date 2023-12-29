@@ -3,11 +3,14 @@ import {months, initialBookingState, recipientState } from "@/constants";
 import CutomButton from "../defaultComponents/customButtons/cutomButton";
 import NewsLetter from "../defaultComponents/newsLetter";
 import { useMedia } from "react-use";
-import bookingsStore from "@/store/bookings.store";
 import { v4 as uuidv4 } from "uuid";
 import { toast } from "react-hot-toast";
-import { Payment } from "@/components/payment";
 import lookupStore from "@/store/lookups.store";
+import { addBooking } from "@/services/booking";
+import { useMutation } from "@tanstack/react-query";
+import UsersStore from "@/store/users.store";
+import { Payment } from "../payment";
+import { useRouter as useNavigation } from "next/navigation";
 
 interface props {
   id?: any;
@@ -17,6 +20,19 @@ const TicketSummury: FC<props> = ({ id }) => {
   const isSmallScreen = useMedia("(max-width: 600px)");
   const isMediumScreen = useMedia("(min-width: 601px) and (max-width: 1023px)");
   const [events, setEvents] = useState([]);
+  const [userId, setUserId] = useState(null);
+  const navigation = useNavigation();
+  const { mutateAsync, error, isError } = useMutation({
+    mutationFn: addBooking, 
+    onSuccess: (responce: any) => {
+      toast.success("ticket booked successfully");
+     
+      
+    },
+    onError: (error: any) => {
+      toast.error(error.response.data.error.message);
+    },
+  });
   const singleEvent = events.filter(
     (item: any) => item.id === parseInt(id)
   ) as { [x: string]: any };
@@ -31,6 +47,9 @@ const TicketSummury: FC<props> = ({ id }) => {
     setEvents(events);
   }, [systemLookups]);
   console.log("bookings", JSON.parse(JSON.stringify(singleEvent)));
+  useEffect(() => {
+    setUserId(UsersStore?.users[0]?.id);
+  }, [UsersStore, userId,]);
   const dateObject = new Date(singleEvent[0]?.attributes.DateTime);
 
   const monthShort = months[dateObject.getMonth()];
@@ -62,22 +81,24 @@ const TicketSummury: FC<props> = ({ id }) => {
       setEventUpdate(!eventUpdate); // Toggle the value
     }
   };
-  const createBooking = () => {
+  const createBooking = async () => {
     const uuid = uuidv4();
     if (validateContactForm()) {
-      bookingsStore.addBooking({
-        ...bookings,
-        id: uuid,
-        eventId: id,
-        newsUpdate: newsUpdate,
-        eventUpdate: eventUpdate,
-      });
-      toast.success("Booking created.");
-      // navigation.push(`booking?id=${uuid}`);
-      Payment({
-        lineItems: [{ price: "price_1OMvGvDouCITlfo8BaYKy42i", quantity: 1 }],
-        id: uuid,
-      });
+      if(userId!=undefined)
+      {
+       await mutateAsync({
+         data:{...bookings,userId:userId,eventId:id,bookingId:uuid}
+        });
+        Payment({
+          lineItems: [{ price: "price_1OMvGvDouCITlfo8BaYKy42i", quantity: 1 }],
+          id: uuid,
+        });
+      }
+      else
+      {
+       navigation.push(`/login`);
+       toast.error("please Signin first.")
+      }
     } else {
       toast.error("Please fill all fields.");
     }
@@ -96,13 +117,14 @@ const TicketSummury: FC<props> = ({ id }) => {
     }
   };
 
+
   const validateContactForm = () =>
     Object.entries(bookings).every(
       ([key, value]) =>
-        key === "id" ||
+        key === "bookingId" ||
         key === "userId" ||
         key === "eventId" ||
-        (key !== "id" && key !== "eventId" && key !== "userId" && value !== "")
+        (key !== "bookingId" && key !== "eventId" && key !== "userId" && value !== "")
     );
 
   const validateRecipient = () =>

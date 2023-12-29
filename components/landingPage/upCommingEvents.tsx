@@ -1,6 +1,5 @@
 import React, { useRef,useEffect,useState } from "react";
 import EventCard from "./components/eventCard";
-import { eventData } from "@/constants";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
