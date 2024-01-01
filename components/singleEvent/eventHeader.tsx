@@ -3,8 +3,13 @@ import lookupStore from "@/store/lookups.store";
 import { useRouter } from "next/router";
 import { months } from "@/constants";
 import MediaCard from "./mediaCard";
+import TicketOrdering from "./ticketOrdering";
+import UpCommingEvents from "../landingPage/upCommingEvents";
+import NewsLetter from "../defaultComponents/newsLetter";
+import { useRouter as useNavigation } from "next/navigation";
 interface props {}
 const EventHeader: FC<props> = ({}) => {
+  const navigation = useNavigation();
   const router = useRouter();
   const { id } = router.query;
   const [events, setEvents] = useState<any>([]);
@@ -177,12 +182,30 @@ const EventHeader: FC<props> = ({}) => {
             </div>
           </div>
           <div>
-            <button className=" bg-[#FD2F09] h-[48px] w-full mt-10 rounded-[4px] text-[#ffff] tex-[18px] font-[500]">Get Tickets</button>
+            <button className=" bg-[#FD2F09] h-[48px] w-full mt-10 rounded-[4px] text-[#ffff] tex-[18px] font-[500]"
+            onClick={()=>{
+              navigation.push(`checkout?id=${id}`);
+            }}>
+              Get Tickets
+            </button>
           </div>
         </div>
       </div>
+      <div>
+        <MediaCard></MediaCard>
+      </div>
 
-      <div><MediaCard></MediaCard></div>
+      <div className="pt-10">
+        <TicketOrdering ticketPricing={singleEvent?.attributes}></TicketOrdering>
+      </div>
+
+      <div className="mt-[100px]">
+        <UpCommingEvents></UpCommingEvents>
+      </div>
+
+      <div>
+        <NewsLetter></NewsLetter>
+      </div>
     </div>
   );
 };
