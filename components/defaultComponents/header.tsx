@@ -3,7 +3,9 @@ import { CUSTOMMENU } from "../../constants";
 import CutomButton from "./customButtons/cutomButton";
 import Link from "next/link";
 import UsersStore from "@/store/users.store";
+import { useRouter as useNavigation } from "next/navigation";
 function Header() {
+  const navigation = useNavigation();
   const [isOpenMenu, setIsOpenMenu] = useState<boolean>(false);
   const [userId, setUserId] = useState(null);
   useEffect(() => {
@@ -13,7 +15,9 @@ function Header() {
     <div className="sticky top-[0px] h-[58px] lg:flex items-center justify-between bg-[white] z-50">
       <div className="flex justify-between items-center">
         <div>
-          <img src="/assets/images/logo.png" alt="" width={110} />
+          <img src="/assets/images/logo.png" alt="" width={110} onClick={()=>{
+            navigation.push("/")
+          }} className="cursor-pointer" />
         </div>
         <div className="lg:hidden xl:hidden">
           <img
@@ -56,7 +60,7 @@ function Header() {
           </div>
         ))}
 
-        <CutomButton label={"Create events"}></CutomButton>
+        {/* <CutomButton label={"Create events"}></CutomButton> */}
       </div>
     </div>
   );

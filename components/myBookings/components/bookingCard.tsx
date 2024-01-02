@@ -61,7 +61,7 @@ const BookingCard: FC<props> = ({ events, bookings }) => {
                 Lagos
               </span>
             </div>
-            <div>
+            <div className="w-[320px]">
               <span className="text-[14px] font-[500] text-[#979797]">
                 {events.attributes.location}
               </span>

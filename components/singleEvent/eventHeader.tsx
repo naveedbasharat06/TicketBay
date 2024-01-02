@@ -16,6 +16,7 @@ const EventHeader: FC<props> = ({}) => {
   const { systemLookups, loading } = lookupStore;
   const eventId = id ? parseInt(id as string, 10) : null;
   const singleEvent = events?.find((item: any) => item.id === eventId);
+  const[moveNexts,setMoveNext]=useState(false)
   useEffect(() => {
     setEvents(systemLookups.events);
   }, [systemLookups]);
@@ -25,7 +26,6 @@ const EventHeader: FC<props> = ({}) => {
   const year = dateObject.getFullYear();
   const calculatePercentage = (ticketCount: number) =>
     (ticketCount / 170) * 100;
-
   const festivel = calculatePercentage(65);
   const vipProgress = calculatePercentage(125);
 
@@ -184,7 +184,7 @@ const EventHeader: FC<props> = ({}) => {
           <div>
             <button className=" bg-[#FD2F09] h-[48px] w-full mt-10 rounded-[4px] text-[#ffff] tex-[18px] font-[500]"
             onClick={()=>{
-              navigation.push(`checkout?id=${id}`);
+              setMoveNext(true)
             }}>
               Get Tickets
             </button>
@@ -196,7 +196,7 @@ const EventHeader: FC<props> = ({}) => {
       </div>
 
       <div className="pt-10">
-        <TicketOrdering ticketPricing={singleEvent?.attributes}></TicketOrdering>
+        <TicketOrdering ticketPricing={singleEvent?.attributes} moveNext={moveNexts} setMoveNext={setMoveNext}></TicketOrdering>
       </div>
 
       <div className="mt-[100px]">

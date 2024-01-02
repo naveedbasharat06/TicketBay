@@ -2,8 +2,10 @@ import React, { useEffect, useState } from "react";
 import lookupStore from "@/store/lookups.store";
 import CategoryCard from "./customComponents/categoryCard";
 import { useMedia } from "react-use";
+import { useRouter as useNavigation } from "next/navigation";
 
 function BrowsEvent() {
+  const navigation = useNavigation();
   const { systemLookups, loading } = lookupStore;
   const [categories, setCategories] = useState<any | undefined>(undefined);
   const [singleEvent, setSingleEvent] = useState<any | undefined>();
@@ -61,7 +63,10 @@ function BrowsEvent() {
                   : ""
               }`}
             >
-              <button className="pl-3 pr-3 pt-2 pb-2 rounded-[4px] bg-[#FD2F09] text-[#ffff]">
+              <button className="pl-3 pr-3 pt-2 pb-2 rounded-[4px] bg-[#FD2F09] text-[#ffff]"
+              onClick={()=>{
+                navigation.push(`events/details?id=${singleEvent?.id}`);
+              }}>
                 Book Ticket
               </button>
             </div>
