@@ -10,7 +10,10 @@ const BookingCard: FC<props> = ({ events, bookings }) => {
   const [dropdown, setDropdown] = useState(false);
   const [id, setId] = useState();
   const [view, setView] = useState(false);
-  const desiredBooking = bookings.find((booking: { attributes: { eventId: any; }; }) => booking.attributes.eventId === events.id.toString());
+  const desiredBooking = bookings.find(
+    (booking: { attributes: { eventId: any } }) =>
+      booking.attributes.eventId === events.id.toString()
+  );
 
   const handelDropDown = (menuId: any) => {
     if (menuId === 1 && !view) {
@@ -91,10 +94,11 @@ const BookingCard: FC<props> = ({ events, bookings }) => {
             />
           </div>
         </div>
-        {id === events.id && dropdown  && (
+        {id === events.id && dropdown && (
           <div className="w-[110px] h-[170px] shadow absolute bg-[#ffff]  right-[100px]">
             {dashboardDropdown.map((item) => (
               <div
+              key={item.id}
                 className=" pl-2 mt-[9px] cursor-pointer hover-menu"
                 onClick={() => {
                   setDropdown(false);
@@ -214,13 +218,11 @@ const BookingCard: FC<props> = ({ events, bookings }) => {
               </div>
 
               <div className="flex gap-4 mt-5">
-                {
-                  desiredBooking?.attributes.recipient?.map((item:any)=>(
+                {desiredBooking?.attributes.recipient?.map((item: any) => (
+                  <div key={item}>
                     <RecipientCard recipient={item}></RecipientCard>
-                  ))
-                }
-              
-               
+                  </div>
+                ))}
               </div>
             </div>
             <div className=" bg-[#E3F5FF] w-[35%] rounded-[4px] mt-5">
@@ -255,7 +257,9 @@ const BookingCard: FC<props> = ({ events, bookings }) => {
                     </div>
                     <div>
                       <span className="text-[14px] font-[500] text-[#133142]">
-                       {desiredBooking?.attributes.firstName+" "+desiredBooking?.attributes.lastName}
+                        {desiredBooking?.attributes.firstName +
+                          " " +
+                          desiredBooking?.attributes.lastName}
                       </span>
                     </div>
                   </div>

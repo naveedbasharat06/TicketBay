@@ -6,7 +6,7 @@ import "slick-carousel/slick/slick-theme.css";
 import { logoData } from "@/constants";
 import { useMedia } from "react-use";
 
-function carousel() {
+function Carousel() {
   const isSmallScreen = useMedia("(max-width: 600px)");
   const isMediumScreen = useMedia("(min-width: 601px) and (max-width: 1024px)");
   console.log("screensize", isSmallScreen, isMediumScreen);
@@ -36,4 +36,4 @@ function carousel() {
   );
 }
 
-export default carousel;
+export default Carousel;

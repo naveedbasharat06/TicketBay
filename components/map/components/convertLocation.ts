@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-const convertLocation = (location: any) => {
+const ConvertLocation = (location: any) => {
   const [coordinates, setCoordinates] = useState({ lat: 0, lng: 0 });
   const [loading, setLoading] = useState(true);
 
@@ -32,4 +32,4 @@ const convertLocation = (location: any) => {
   return { coordinates, loading };
 };
 
-export default convertLocation;
+export default ConvertLocation;

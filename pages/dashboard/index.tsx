@@ -3,7 +3,7 @@ import BrowsEvent from "@/components/dashboard/browsEvent";
 import DashboardBookings from "@/components/dashboard/dashboardBookings";
 import { useMedia } from "react-use";
 
-function index() {
+function Dashboard() {
   const isSmallScreen = useMedia("(max-width: 600px)");
   const isMediumScreen = useMedia("(min-width: 601px) and (max-width: 1024px)");
   return (
@@ -16,4 +16,4 @@ function index() {
   );
 }
 
-export default index;
+export default Dashboard;

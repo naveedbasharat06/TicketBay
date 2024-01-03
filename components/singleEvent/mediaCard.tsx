@@ -27,6 +27,7 @@ const MediaCard: FC<props> = ({ media }) => {
       <div className="lg:flex gap-3 mt-3">
         {tempMedia.map((item) => (
           <img
+          key={item.imgUrl}
             src={item.imgUrl}
             alt="image"
             className="lg:h-[188px] lg:w-[300px] w-full rounded-[4px] mt-[20px]"

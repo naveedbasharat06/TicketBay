@@ -43,6 +43,7 @@ const SidebarLayout: FC<props> = ({ children }) => {
 
           {sidebar.map((item) => (
             <div
+            key={item.id}
               className="ml-[33px] mt-4 flex items-center gap-2 cursor-pointer"
               onClick={() => {
                 setMenuItem(item.short);

@@ -235,5 +235,5 @@ const TicketOrdering: FC<props> = React.memo(
     );
   }
 );
-
+TicketOrdering.displayName="TicketOrdering"
 export default TicketOrdering;

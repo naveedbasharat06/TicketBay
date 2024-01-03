@@ -64,14 +64,14 @@ function EventDiscovery() {
   useEffect(() => {
     applySortingAndFiltering();
     isSmallScreen ? setEventsPerPage(5) : setEventsPerPage(12);
-  }, [activeTab, isSmallScreen, activeFilter,events]);
+  }, [activeTab, isSmallScreen, activeFilter, events]);
 
   // Only apply filters when the filter changes
   useEffect(() => {
     if (activeFilter > 1) {
       applySortingAndFiltering();
     }
-  }, [activeFilter,events]);
+  }, [activeFilter, events]);
 
   const searchInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = event.target.value;
@@ -97,7 +97,6 @@ function EventDiscovery() {
       return eventDate.getTime() >= currentDate.getTime();
     });
   };
-  
 
   const indexOfLastEvent = currentPage * eventsPerPage;
   const indexOfFirstEvent = indexOfLastEvent - eventsPerPage;
@@ -187,6 +186,7 @@ function EventDiscovery() {
                 <ul className="py-2 text-sm text-gray-700 dark:text-gray-200 ">
                   {eventsDropDown.map((item) => (
                     <li
+                      key={item.menu}
                       className="cursor-pointer"
                       onClick={() => {
                         setIsDropdownVisible(false);
@@ -214,6 +214,7 @@ function EventDiscovery() {
       <div className="grid lg:grid-cols-4 md:grid-cols-3 gap-5">
         {currentEvents?.map((event: any) => (
           <div
+            key={event.id}
             className="cursor-pointer"
             onClick={() => {
               navigation.push(`events/details?id=${event.id}`);

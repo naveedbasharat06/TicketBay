@@ -72,9 +72,11 @@ function UpCommingEvents() {
       >
         <Slider {...settings} ref={sliderRef}>
           {events.map((card: any) => (
-            <div>
+            <div key={card}>
               <div
-                className={isMediumScreen ? "pl-[20px] cursor-pointer" : "cursor-pointer"}
+                className={
+                  isMediumScreen ? "pl-[20px] cursor-pointer" : "cursor-pointer"
+                }
                 onClick={() => {
                   navigation.push(`/events/details?id=${card?.id}`);
                 }}
