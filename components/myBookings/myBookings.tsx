@@ -15,10 +15,15 @@ function MyBookings() {
   const eventIds: number[] = bookings?.map(
     (booking: { attributes: { eventId: any } }) => booking?.attributes.eventId
   );
-  const mybookings = events?.filter(
-    (event: { id: { toString: () => number } }) =>
-      eventIds?.includes(event.id.toString())
-  );
+
+
+  const mybookings = events?.flatMap((event:any) => {
+    const eventId = event.id.toString();
+    const occurrences = (eventIds?.filter(id => id === eventId) || []).length;
+  
+    // Create an array with repeated occurrences of the current event
+    return Array.from({ length: occurrences }, () => event);
+  });
   const uniqueDates = Array.from(
     new Set(
       mybookings?.map((event: any) => {
@@ -49,6 +54,12 @@ function MyBookings() {
   }, [selectedTab]);
 
   useEffect(() => {
+    if (sortedDate.length === 0) {
+      setSortedDate(uniqueDates);
+    }
+  }, [uniqueDates]);
+
+  useEffect(() => {
     setUserId(String(UsersStore?.users[0]?.id));
     setEvents(systemLookups.events);
     const filteredBookings = systemLookups?.bookings?.filter(
@@ -57,7 +68,6 @@ function MyBookings() {
     );
     setBookings(filteredBookings);
   }, [systemLookups, UsersStore, userId]);
-  console.log(JSON.parse(JSON.stringify(uniqueDates)));
   const container = {
     hidden: { opacity: 1, scale: 0 },
     visible: {

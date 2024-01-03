@@ -216,7 +216,7 @@ function EventDiscovery() {
           <div
             className="cursor-pointer"
             onClick={() => {
-              navigation.push(`events/checkout?id=${event.id}`);
+              navigation.push(`events/details?id=${event.id}`);
             }}
           >
             <EventCard event={event.attributes} />

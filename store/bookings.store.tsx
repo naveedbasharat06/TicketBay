@@ -1,4 +1,5 @@
 import { observable, action, makeObservable } from "mobx";
+
 class BookingsStore {
   [x: string]: any;
   bookings: any[] = [];
@@ -13,7 +14,8 @@ class BookingsStore {
   }
 
   addBooking(booking: any) {
-    this.bookings.push(booking);
+    // Reset the bookings array with the new booking
+    this.bookings = [booking];
     this.saveToLocalStorage();
   }
 
@@ -34,7 +36,6 @@ class BookingsStore {
       }
     }
   }
-  
 }
 
 const bookingsStore = new BookingsStore();

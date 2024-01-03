@@ -1,16 +1,16 @@
 import React, { FC, useState, useEffect } from "react";
-import {months, initialBookingState, recipientState } from "@/constants";
+import { months, initialBookingState, recipientState } from "@/constants";
 import CutomButton from "../defaultComponents/customButtons/cutomButton";
 import NewsLetter from "../defaultComponents/newsLetter";
 import { useMedia } from "react-use";
 import { v4 as uuidv4 } from "uuid";
+import { Payment } from "../payment";
 import { toast } from "react-hot-toast";
 import lookupStore from "@/store/lookups.store";
-import { addBooking } from "@/services/booking";
-import { useMutation } from "@tanstack/react-query";
 import UsersStore from "@/store/users.store";
-import { Payment } from "../payment";
 import { useRouter as useNavigation } from "next/navigation";
+import ticketStore from "@/store/ticket.store";
+import bookingsStore from "@/store/bookings.store";
 
 interface props {
   id?: any;
@@ -21,18 +21,12 @@ const TicketSummury: FC<props> = ({ id }) => {
   const isMediumScreen = useMedia("(min-width: 601px) and (max-width: 1023px)");
   const [events, setEvents] = useState([]);
   const [userId, setUserId] = useState(null);
+
   const navigation = useNavigation();
-  const { mutateAsync, error, isError } = useMutation({
-    mutationFn: addBooking, 
-    onSuccess: (responce: any) => {
-      toast.success("ticket booked successfully");
-     
-      
-    },
-    onError: (error: any) => {
-      toast.error(error.response.data.error.message);
-    },
-  });
+  const tax = 30;
+  const serviceCharge = 300;
+  const totalAmount = tax + serviceCharge + ticketStore.tickets[0]?.total;
+
   const singleEvent = events.filter(
     (item: any) => item.id === parseInt(id)
   ) as { [x: string]: any };
@@ -46,10 +40,10 @@ const TicketSummury: FC<props> = ({ id }) => {
     const { events = [] } = systemLookups || {};
     setEvents(events);
   }, [systemLookups]);
-  console.log("bookings", JSON.parse(JSON.stringify(singleEvent)));
+  console.log("bookings", JSON.parse(JSON.stringify(bookingsStore.bookings)));
   useEffect(() => {
     setUserId(UsersStore?.users[0]?.id);
-  }, [UsersStore, userId,]);
+  }, [UsersStore, userId]);
   const dateObject = new Date(singleEvent[0]?.attributes.DateTime);
 
   const monthShort = months[dateObject.getMonth()];
@@ -84,20 +78,24 @@ const TicketSummury: FC<props> = ({ id }) => {
   const createBooking = async () => {
     const uuid = uuidv4();
     if (validateContactForm()) {
-      if(userId!=undefined)
-      {
-       await mutateAsync({
-         data:{...bookings,userId:userId,eventId:id,bookingId:uuid}
+      if (userId != undefined) {
+        bookingsStore.addBooking({
+          ...bookings,
+          userId: userId,
+          eventId: id,
+          bookingId: uuid,
+          regularQty: ticketStore.tickets[0].regular,
+          vipQty: ticketStore.tickets[0].vip,
+          vvipQty: ticketStore.tickets[0].vvip,
+          total: totalAmount,
         });
         Payment({
           lineItems: [{ price: "price_1OMvGvDouCITlfo8BaYKy42i", quantity: 1 }],
           id: uuid,
         });
-      }
-      else
-      {
-       navigation.push(`/login`);
-       toast.error("please Signin first.")
+      } else {
+        navigation.push(`/login`);
+        toast.error("please Signin first.");
       }
     } else {
       toast.error("Please fill all fields.");
@@ -117,14 +115,23 @@ const TicketSummury: FC<props> = ({ id }) => {
     }
   };
 
-
   const validateContactForm = () =>
     Object.entries(bookings).every(
       ([key, value]) =>
         key === "bookingId" ||
         key === "userId" ||
         key === "eventId" ||
-        (key !== "bookingId" && key !== "eventId" && key !== "userId" && value !== "")
+        key === "regularQty" ||
+        key === "vvipQty" ||
+        key === "vipQty" ||
+        key === "total" ||
+        (key !== "bookingId" &&
+          key !== "eventId" &&
+          key !== "userId" &&
+          key !== "regularQty" &&
+          key !== "vipQty" &&
+          key !== "vvipQty" &&
+          value !== "")
     );
 
   const validateRecipient = () =>
@@ -178,7 +185,7 @@ const TicketSummury: FC<props> = ({ id }) => {
               <div className="flex mt-2 gap-3">
                 <img src="/assets/images/callender.svg" alt="" />
                 <span className="text-[14px] text-[#979797] font-[500]">
-                  {monthShort + " " + day +" "+ year}
+                  {monthShort + " " + day + " " + year}
                 </span>
               </div>
 
@@ -417,12 +424,16 @@ const TicketSummury: FC<props> = ({ id }) => {
             <div className="flex justify-between mt-6">
               <div>
                 <span className="text-[16px] font-[500] text-[#979797]">
-                  3x {singleEvent[0]?.eventdesc}
+                  {ticketStore.tickets[0]?.regular +
+                    ticketStore.tickets[0]?.vip +
+                    ticketStore.tickets[0]?.vvip}
+                  {"x"}
                 </span>
               </div>
               <div>
                 <span className="text-[16px] font-[500] text-[#979797]">
-                  N3000
+                  {"N"}
+                  {ticketStore.tickets[0]?.total}
                 </span>
               </div>
             </div>
@@ -435,7 +446,7 @@ const TicketSummury: FC<props> = ({ id }) => {
               </div>
               <div>
                 <span className="text-[16px] font-[500] text-[#979797]">
-                  N300
+                  N{serviceCharge}
                 </span>
               </div>
             </div>
@@ -448,7 +459,7 @@ const TicketSummury: FC<props> = ({ id }) => {
               </div>
               <div>
                 <span className="text-[16px] font-[500] text-[#979797]">
-                  N30
+                  N{tax}
                 </span>
               </div>
             </div>
@@ -461,7 +472,7 @@ const TicketSummury: FC<props> = ({ id }) => {
               </div>
               <div>
                 <span className="text-[16px] font-[500] text-[#979797]">
-                  N3330
+                  N{tax + serviceCharge + ticketStore.tickets[0]?.total}
                 </span>
               </div>
             </div>

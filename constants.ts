@@ -14,6 +14,10 @@ const RECIPIENT_PHONE = "phone";
 const NEWS_UPDATE = "newsUpdate";
 const EVENT_UPDATE = "eventUpdate";
 const BOOKINGID = "bookingId";
+const REGULARQTY = "regularQty";
+const VIPQTY = "vipQty";
+const VVIPQTY = "vvipQty";
+const TOTAL = "total";
 
 export const initialBookingState = {
   [USERID]: "",
@@ -25,6 +29,10 @@ export const initialBookingState = {
   [BOOKINGID]: "",
   [NEWS_UPDATE]: false,
   [EVENT_UPDATE]: false,
+  [REGULARQTY]:"",
+  [VIPQTY]:"",
+  [VVIPQTY]:"",
+  [TOTAL]:"",
   [RECIPIENT]: [] as {
     id: string;
     firstName: string;
@@ -41,6 +49,12 @@ export const recipientState = {
   [RECIPIENT_EMAIL]: "",
   [RECIPIENT_PHONE]: "",
 };
+export const ticketState={
+  regular:"",
+  vip:"",
+  vvip:"",
+  total:""
+}
 export const intialUserDetails = {
   username: "",
   email: "",
@@ -99,18 +113,18 @@ export const CUSTOMMENU = [
     id: 2,
     menu: "Events",
   },
-  {
-    id: 3,
-    menu: "Organiser",
-  },
-  {
-    id: 4,
-    menu: "Contact",
-  },
-  {
-    id: 5,
-    menu: "Blog",
-  },
+  // {
+  //   id: 3,
+  //   menu: "Organiser",
+  // },
+  // {
+  //   id: 4,
+  //   menu: "Contact",
+  // },
+  // {
+  //   id: 5,
+  //   menu: "Blog",
+  // },
   {
     id: 6,
     menu: "Login",
@@ -130,18 +144,18 @@ export const sidebar = [
     iconUrl: "/assets/images/booking.svg",
     short: "Bookings",
   },
-  {
-    id: 3,
-    menu: "Organisers",
-    iconUrl: "/assets/images/organizer.svg",
-    short: "Organisers",
-  },
-  {
-    id: 4,
-    menu: "Profile",
-    iconUrl: "/assets/images/profile.svg",
-    short: "Profile",
-  },
+  // {
+  //   id: 3,
+  //   menu: "Organisers",
+  //   iconUrl: "/assets/images/organizer.svg",
+  //   short: "Organisers",
+  // },
+  // {
+  //   id: 4,
+  //   menu: "Profile",
+  //   iconUrl: "/assets/images/profile.svg",
+  //   short: "Profile",
+  // },
   {
     id: 5,
     menu: "Logout",

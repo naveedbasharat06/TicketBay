@@ -1,7 +1,9 @@
 import React from "react";
 import { useMedia } from "react-use";
+import { useRouter as useNavigation } from "next/navigation";
 
 function DashboardBookings() {
+  const navigation = useNavigation();
   const isSmallScreen = useMedia("(max-width: 600px)");
   const isMediumScreen = useMedia("(min-width: 601px) and (max-width: 1024px)");
   return (
@@ -29,7 +31,10 @@ function DashboardBookings() {
             </div>
 
             <div className="flex justify-center mt-5">
-              <button className="text-[#ffff] bg-[#FD2F09] h-[40px] w-[115px] rounded-[4px]">
+              <button className="text-[#ffff] bg-[#FD2F09] h-[40px] w-[115px] rounded-[4px]"
+              onClick={()=>{
+                navigation.push(`events`);
+              }}>
                 Go to events
               </button>
             </div>
