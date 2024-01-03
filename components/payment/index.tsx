@@ -1,5 +1,4 @@
 import { Stripe, loadStripe } from "@stripe/stripe-js";
-import { PaymentSuccess } from "./handlePaymentSuccess";
 
 export async function Payment({
   lineItems,
@@ -29,7 +28,6 @@ export async function Payment({
       successUrl: `${window.location.origin}/events/booking?id=${encodedId}`,
       cancelUrl: window.location.origin, 
     });
-    PaymentSuccess();
   } else {
     console.error("Stripe.js has not loaded yet.");
   }
