@@ -15,8 +15,16 @@ function UpCommingEvents() {
   const [events, setEvents] = useState([]);
   const { systemLookups, loading } = lookupStore;
   useEffect(() => {
-    const { events = [] } = systemLookups || {};
-    setEvents(events);
+    const fetchData = async () => {
+      try {
+        const { events = [] } = await systemLookups; // Assuming systemLookups is a Promise
+        setEvents(events);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+  
+    fetchData();
   }, [systemLookups]);
 
   const settings = {
