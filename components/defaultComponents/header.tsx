@@ -60,7 +60,11 @@ function Header() {
           </div>
         ))}
 
-        {/* <CutomButton label={"Create events"}></CutomButton> */}
+        <div onClick={()=>{
+          navigation.push("/create")
+        }}>
+          <CutomButton label={"Create events"}></CutomButton>
+        </div>
       </div>
     </div>
   );

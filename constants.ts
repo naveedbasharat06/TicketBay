@@ -131,6 +131,11 @@ export const CUSTOMMENU = [
   },
 ];
 
+export interface Tag {
+  id: number;
+  tag: string;
+}
+
 export const sidebar = [
   {
     id: 1,
