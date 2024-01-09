@@ -14,9 +14,10 @@ const MapMarker = () => (
 
 interface Props {
   location?: string;
+  height?:string
 }
 
-const Map: FC<Props> = ({ location }) => {
+const Map: FC<Props> = ({ location ,height}) => {
   const { coordinates, loading } = convertLocation(location);
   if (loading) {
     return <div>Loading...</div>;
@@ -37,7 +38,7 @@ const Map: FC<Props> = ({ location }) => {
   };
 
   return (
-    <div className="h-[440px] w-[100%] rounded-[4px] overflow-auto">
+    <div className={height?`h-[${height}] w-[100%] rounded-[4px] overflow-auto`:`h-[440px] w-[100%] rounded-[4px] overflow-auto`}>
       <GoogleMapReact
         bootstrapURLKeys={{ key: `${process.env.NEXT_PUBLIC_MAP_KEY}` }}
         defaultCenter={defaultProps.center}
